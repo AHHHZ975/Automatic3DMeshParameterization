@@ -296,7 +296,7 @@
       <!-- TODO: Replace with your teaser video -->
       <img src="static/images/ICLR_Approach_Overview_v1.1.png" alt="Training overview" class="blend-img-background center-image">
     </div>
-    <div class="content has-text-justified">          
+    <div class="content has-text-justified">
       <p>
           An overview of the training process of the proposed semantic-aware UV parameterization method, consisting of three main stage: (i) semantic 3D partitioning, where we compute a per-vertex semantic partition of the input mesh using shape diameter function; (ii) geometry-preserving UV learning, where we apply the base UV-parameterization backbone independently to each semantic part to obtain per-part UV islands; and (iii) UV atlas aggregation and packing aggregate and pack these islands into a unified UV atlas.
       </p>
@@ -322,7 +322,17 @@
         </p>
       </div>
       <img src="static/images/Results_SemanticAware_Short_Short.jpg" alt="Comparative results" class="blend-img-background center-image">
+      <div class="content has-text-justified">          
+        <p>
+          Qualitative results of the proposed semantic-aware UV parameterization method on a Rabbit mesh. For each method, we show the rendered 3D object from multiple viewpoints, with the corresponding UV atlas in the rightmost column. As shown, our method produces UV charts that are align more semantically with the mesh’s 3D semantic parts, unlike the baselines.
+        </p>
+      </div>
       <img src="static/images/Results_VisibilityAware_CheckerboardDistortion_Full.jpg" alt="Comparative results" class="blend-img-background center-image">
+      <div class="content has-text-justified">          
+        <p>
+          Checkerboard texturing comparison using UV parameterizations produced by our visibility-aware method, FlexPara, and OptCuts. Each row shows rendered views of different meshes textured with a checkerboard and a magnified inset of a visually important region near seams (red circles). Because our method steers seams toward occluded regions, the checkerboard pattern appears substantially more continuous from typical camera viewpoints. By contrast, baselines exhibit visible seam artifacts in the zoomed-in insets.
+        </p>
+      </div>
     </div>
     <h2 class="subtitle has-text-centered"> Quantitative Comparison </h2>
     <div class="hero-body">
