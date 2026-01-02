@@ -254,84 +254,21 @@
 
 
 
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/CamPoseAware.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          1- Camera-Pose-Aware Reward: 
-        </h2>
-        <div class="content has-text-justified">          
-          <p>
-            Qualitative results of the camera-pose-aware texture generation experiment for different 
-            text prompts on different 3D mesh objects. The objective of this experiment is to learn optimal camera viewpoints such that,
-            when the object is rendered and textured from these views, the resulting texture maximizes the average aesthetic reward. 
-            Consequently, by maximizing this reward, the model becomes invariant to the initial camera positions: regardless of where
-            the cameras start, the training will adjust their azimuth and elevation to surround the 3D object in a way that yields high‑quality,
-            aesthetically pleasing textures.
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/Symmetry.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          2- Symmetry-Aware Texture Generation Reward:
-        </h2>
-        <div class="content has-text-justified">          
-          <p>
-            Qualitative results of symmetry-aware texture generation experiment on a balloon mesh object.
-            For each rwo (after and before fine-tuning), we show the rendered 3D object from multiple viewpoints, alongside the corresponding texture images
-            (rightmost column), which highlight the symmetric regions. A vertical dashed line marks the symmetry axis in each texture image. 
-            The purple plane passing through the center of the balloon in each viewpoint indicates the estimated symmetry plane of the object. 
-            As shown, compared to the pre-trained model, our method generates textures that are more consistent across symmetric parts of the mesh. 
-            Without symmetry supervision, patterns often differ noticeably between sides. In contrast, textures trained with the proposed symmetry reward 
-            exhibit visually coherent features across symmetric regions, demonstrating the reward’s effectiveness in enforcing symmetry consistency.
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/MinTexGeoAlign.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         3- Geometry-Texture Alignment Reward:
-       </h2>
-       <div class="content has-text-justified">          
-          <p>
-            Qualitative results of the geometry-texture alignment experiment on a rabbit (bunny) mesh. For each row (before and after fine-tuning),
-            we show the rendered 3D object from multiple viewpoints, with the corresponding texture image in the rightmost column. As shown, our method produces textures whose patterns 
-            align more closely with the mesh’s curvature directions, unlike the pre-trained model. Moreover, a notable outcome in our results is the emergence of repetitive texture patterns
-            after fine-tuning with the geometry-texture alignment reward. This behavior arises from the differentiable sampling strategy used during reward computation. Specifically, 
-            it encourages the model to place edge features at specific UV coordinates which ultimately results in structured and repeated patterns in the texture.
-          </p>
-        </div>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/TexFeatEmph.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        4- Texture-Features Emphasis Reward:
-      </h2>
-      <div class="content has-text-justified">          
-          <p>
-            Qualitative results of the texture features emphasis experiment on a rabbit (bunny) object. For each row (before and after fine-tuning),
-            we show the rendered 3D object from multiple viewpoints, with the corresponding texture image in the rightmost column. The goal of this experiment is to learn texture images 
-            with salient features (e.g., edges) emphasized at regions of high surface bending, represented by the magnitude of mean curvature. This encourages texture patterns that highlight
-            3D surface structure while preserving perceptual richness through color variation. As illustrated, our method enhances texture features, such as edges and mortar, in proportion to
-            local curvature, a capability the pre-trained model lacks, often resulting in pattern-less (white) areas, particularly on the back and head of the rabbit.
-          </p>
-        </div>
+<!-- Teaser Image -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- TODO: Replace with your teaser video -->
+      <img src="static/images/ICLR_Teaser_Figure_v1.2.png" alt="Teaser Image" class="blend-img-background center-image">
+    </div>
+    <div class="content has-text-justified">          
+      <p>
+          3D mesh parameterizations generated by our proposed semantic- (left) and visibility-aware (right) pipelines. Semantic-Aware (left): To encourage semantically coherent UV charts that simplify texture editing, given an input 3D mesh (a), we design a partition-and-parameterize strategy: (b) compute a per-vertex semantic partition of the mesh, (c) learn a geometry-preserving UV parameterization independently for each semantic part to obtain per-part UV islands, and then aggregate and pack these islands into a unified UV atlas (insets). Visibility-Aware (right): To encourage seamless UV mappings, our visibility-aware pipeline (d) takes an input 3D mesh, jointly (e) guides cutting-seam placement (red curves), extracts the corresponding boundary points in UV space (red dots), and (f) estimates a global geometry-preserving parameterization. As a result, the method steers cutting seams toward less-visible (more occluded) surface regions, resulting in more visually seamless UV maps.
+      </p>
     </div>
   </div>
-</div>
-</div>
 </section>
-<!-- End image carousel -->
+<!-- End paper methodology -->
 
 
 
