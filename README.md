@@ -1,4 +1,4 @@
-# The code for the webpage of the paper: "End-to-End Fine-Tuning of 3D Texture Generation using Differentiable Rewards"
+# The code for the webpage of the paper: "Unsupervised Representation Learning for 3D Mesh Parameterization with Semantic and Visibility Objectives"
 See the project webpage [here](https://ahhhz975.github.io/Automatic3DMeshParameterization/)
 
 
