@@ -312,21 +312,31 @@
      <div class="columns is-centered has-text-centered">
         <h2 class="title is-3">Comparative Results</h2>
      </div>
-    <h2 class="subtitle has-text-centered"> Qualitative Comparison </h2>
-    <div class="hero-body">
-      <!-- TODO: Replace with your teaser video -->
+    
+    <h2 class="subtitle has-text-centered"> Qualitative Comparison of Visibility-Aware UV Parameterization </h2>
+    <div class="hero-body">      
       <img src="static/images/ICLR_AO_UV_Seams_Figure_v1.1.png" alt="Comparative results" class="blend-img-background center-image">
       <div class="content has-text-justified">          
         <p>
           Qualitative results for visibility-aware seam placement and UV parameterization on three representative meshes. For each mesh, the top row shows per-vertex ambient occlusion (yellow = exposed, purple = occluded). Beneath are the visualizations of cutting seams (red) from our method, FlexPara, and OptCuts (top to bottom). Our method places a larger fraction of seam geometry in less-exposed regions, reducing the likelihood of visible seam artifacts under typical viewpoints.
         </p>
       </div>
+    </div>
+
+
+    <h2 class="subtitle has-text-centered"> Qualitative Comparison of Semantic-Aware UV Parameterization </h2>
+    <div class="hero-body">
       <img src="static/images/Results_SemanticAware_Short_Short.jpg" alt="Comparative results" class="blend-img-background center-image">
-      <div class="content has-text-justified">          
+      <div class="content has-text-justified">
         <p>
           Qualitative results of the proposed semantic-aware UV parameterization method on a Rabbit mesh. For each method, we show the rendered 3D object from multiple viewpoints, with the corresponding UV atlas in the rightmost column. As shown, our method produces UV charts that are align more semantically with the mesh’s 3D semantic parts, unlike the baselines.
         </p>
       </div>
+    </div>
+
+
+    <h2 class="subtitle has-text-centered"> Qualitative Comparison of Checkerboard Texturing using Different UV Parameterization Methods </h2>
+    <div class="hero-body">
       <img src="static/images/Results_VisibilityAware_CheckerboardDistortion_Full.jpg" alt="Comparative results" class="blend-img-background center-image">
       <div class="content has-text-justified">          
         <p>
@@ -334,6 +344,7 @@
         </p>
       </div>
     </div>
+    
     <h2 class="subtitle has-text-centered"> Quantitative Comparison </h2>
     <div class="hero-body">
       <!-- TODO: Replace with your teaser video -->
@@ -343,7 +354,7 @@
 </section>
 
 
-
+    
 
 <!--BibTex citation -->
   <section class="section" id="BibTeX">
