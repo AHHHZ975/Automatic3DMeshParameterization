@@ -268,7 +268,7 @@
     </div>
   </div>
 </section>
-<!-- End paper methodology -->
+<!-- End teaser image -->
 
 
 
@@ -303,7 +303,7 @@
     </div>
     <div class="content has-text-justified">          
       <p>
-          An overview of the proposed training process, consisting of two main stages: (i) texture generation, where a latent diffusion model generates high-quality images from textual prompts. Combined with differentiable rendering and 3D vision techniques, this step produces realistic textures for 3D objects. (ii) texture reward learning, where an end-to-end differentiable pipeline fine-tunes the pre-trained text-to-image diffusion model by maximizing a differentiable reward function r. Gradients are back-propagated through the entire 3D generative pipeline, making the process inherently geometry-aware. To demonstrate the method’s effectiveness in producing textures aligned with 3D geometry, we introduce five novel geometry-aware reward functions.
+          An overview of the training process of the proposed semantic-aware UV parameterization method, consisting of three main stage: (i) semantic 3D partitioning, where we compute a per-vertex semantic partition of the input mesh using shape diameter function; (ii) geometry-preserving UV learning, where we apply the base UV-parameterization backbone independently to each semantic part to obtain per-part UV islands; and (iii) UV atlas aggregation and packing aggregate and pack these islands into a unified UV atlas.
       </p>
     </div>
   </div>
