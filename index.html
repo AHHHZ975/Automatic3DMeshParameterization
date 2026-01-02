@@ -6,13 +6,13 @@
   
   <!-- Primary Meta Tags -->
   <!-- TODO: Replace with your paper title and author names -->
-  <meta name="title" content="End-to-End Fine-Tuning of 3D Texture Generation using Differentiable Rewards - Amirhossein Zamani, Tianhao Xie, Amir Aghdam, Tiberiu Popa, Eugene Belilovsky">
+  <meta name="title" content="Unsupervised Representation Learning for 3D Mesh Parameterization with Semantic and Visibility Objectives - Amirhossein Zamani, Bruno Roy, Arianna Rampini">
   <!-- TODO: Write a compelling 150-160 character description of your research -->
-  <meta name="description" content="While recent 3D generative models can produce high-quality texture images, they often fail to capture human preferences or meet task-specific requirements. Moreover, a core challenge in the 3D texture generation domain is that most existing approaches rely on repeated calls to 2D text-to-image generative models, which lack an inherent understanding of the 3D structure of the input 3D mesh object. To alleviate these issues, we propose an end-to-end differentiable, reinforcement-learning-free framework that embeds human feedback, expressed as differentiable reward functions, directly into the 3D texture synthesis pipeline. By back-propagating preference signals through both geometric and appearance modules of the proposed framework, our method generates textures that respect the 3D geometry structure and align with desired criteria. To demonstrate its versatility, we introduce three novel geometry-aware reward functions, which offer a more controllable and interpretable pathway for creating high-quality 3D content from natural language. By conducting qualitative, quantitative, and user-preference evaluations against state-of-the-art methods, we demonstrate that our proposed strategy consistently outperforms existing approaches.">
+  <meta name="description" content="Recent 3D generative models produce high-quality textures for 3D mesh objects. However, they commonly rely on the heavy assumption that input 3D meshes are accompanied by manual mesh parameterization (UV mapping), a manual task that requires both technical precision and artistic judgment. Industry surveys show that this process often accounts for a significant share of asset creation, creating a major bottleneck for 3D content creators. Moreover, existing automatic methods often ignore two perceptually important criteria: (1) semantic awareness (UV charts should align semantically similar 3D parts across shapes) and (2) visibility awareness (cutting seams should lie in regions unlikely to be seen). To overcome these shortcomings and to automate the mesh parameterization process, we present an unsupervised differentiable framework that augments standard geometry-preserving UV learning with semantic- and visibility-aware objectives. For semantic-awareness, our pipeline (i) segments the mesh into semantic 3D parts, (ii) applies an unsupervised learned per-part UV-parameterization backbone, and (iii) aggregates per-part charts into a unified UV atlas. For visibility-awareness, we use ambient occlusion (AO) as an exposure proxy and back-propagate a soft differentiable AO-weighted seam objective to steer cutting seams toward occluded regions. By conducting qualitative and quantitative evaluations against state-of-the-art methods, we show that the proposed method produces UV atlases that better support texture generation and reduce perceptible seam artifacts compared to recent baselines.">
   <!-- TODO: Add 5-10 relevant keywords for your research area -->
-  <meta name="keywords" content="3D texture generation, differentiable rewards, fine-tuning, RLHF, 3D computer vision, computer graphics, machine learning, computer vision, AI">
+  <meta name="keywords" content="3D mesh parapeterization, UV parameterization, UV mapping, Semantic-aware UV parameterization, Visibility-aware UV parameterization, 3D computer vision, computer graphics, deep learning, machine learning, computer vision, AI">
   <!-- TODO: List all authors -->
-  <meta name="author" content="Amirhossein Zamani, Tianhao Xie, Amir Aghdam, Tiberiu Popa, Eugene Belilovsky">
+  <meta name="author" content="Amirhossein Zamani, Bruno Roy, Arianna Rampini">
   <meta name="robots" content="index, follow">
   <meta name="language" content="English">
   
@@ -21,11 +21,11 @@
   <!-- TODO: Replace with your institution or lab name -->
   <meta property="og:site_name" content="Mila - Quebec AI Institute and Concordia University">
   <!-- TODO: Same as paper title above -->
-  <meta property="og:title" content="End-to-End Fine-Tuning of 3D Texture Generation using Differentiable Rewards">
+  <meta property="og:title" content="Unsupervised Representation Learning for 3D Mesh Parameterization with Semantic and Visibility Objectives">
   <!-- TODO: Same as description above -->
-  <meta property="og:description" content="While recent 3D generative models can produce high-quality texture images, they often fail to capture human preferences or meet task-specific requirements. Moreover, a core challenge in the 3D texture generation domain is that most existing approaches rely on repeated calls to 2D text-to-image generative models, which lack an inherent understanding of the 3D structure of the input 3D mesh object. To alleviate these issues, we propose an end-to-end differentiable, reinforcement-learning-free framework that embeds human feedback, expressed as differentiable reward functions, directly into the 3D texture synthesis pipeline. By back-propagating preference signals through both geometric and appearance modules of the proposed framework, our method generates textures that respect the 3D geometry structure and align with desired criteria. To demonstrate its versatility, we introduce three novel geometry-aware reward functions, which offer a more controllable and interpretable pathway for creating high-quality 3D content from natural language. By conducting qualitative, quantitative, and user-preference evaluations against state-of-the-art methods, we demonstrate that our proposed strategy consistently outperforms existing approaches.">
+  <meta property="og:description" content="Recent 3D generative models produce high-quality textures for 3D mesh objects. However, they commonly rely on the heavy assumption that input 3D meshes are accompanied by manual mesh parameterization (UV mapping), a manual task that requires both technical precision and artistic judgment. Industry surveys show that this process often accounts for a significant share of asset creation, creating a major bottleneck for 3D content creators. Moreover, existing automatic methods often ignore two perceptually important criteria: (1) semantic awareness (UV charts should align semantically similar 3D parts across shapes) and (2) visibility awareness (cutting seams should lie in regions unlikely to be seen). To overcome these shortcomings and to automate the mesh parameterization process, we present an unsupervised differentiable framework that augments standard geometry-preserving UV learning with semantic- and visibility-aware objectives. For semantic-awareness, our pipeline (i) segments the mesh into semantic 3D parts, (ii) applies an unsupervised learned per-part UV-parameterization backbone, and (iii) aggregates per-part charts into a unified UV atlas. For visibility-awareness, we use ambient occlusion (AO) as an exposure proxy and back-propagate a soft differentiable AO-weighted seam objective to steer cutting seams toward occluded regions. By conducting qualitative and quantitative evaluations against state-of-the-art methods, we show that the proposed method produces UV atlases that better support texture generation and reduce perceptible seam artifacts compared to recent baselines.">
   <!-- TODO: Replace with your actual website URL -->
-  <meta property="og:url" content="https://ahhhz975.github.io/DifferentiableTextureLearning/">
+  <meta property="og:url" content="https://ahhhz975.github.io/Automatic3DMeshParameterization/">
   <!-- TODO: Create a 1200x630px preview image and update path -->
   <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
   <meta property="og:image:width" content="1200">
@@ -44,22 +44,20 @@
   <!-- TODO: Replace with first author's Twitter handle -->
   <meta name="twitter:creator" content="@AHHHZ975">
   <!-- TODO: Same as paper title above -->
-  <meta name="twitter:title" content="End-to-End Fine-Tuning of 3D Texture Generation using Differentiable Rewards">
+  <meta name="twitter:title" content="Unsupervised Representation Learning for 3D Mesh Parameterization with Semantic and Visibility Objectives">
   <!-- TODO: Same as description above -->
-  <meta name="twitter:description" content="While recent 3D generative models can produce high-quality texture images, they often fail to capture human preferences or meet task-specific requirements. Moreover, a core challenge in the 3D texture generation domain is that most existing approaches rely on repeated calls to 2D text-to-image generative models, which lack an inherent understanding of the 3D structure of the input 3D mesh object. To alleviate these issues, we propose an end-to-end differentiable, reinforcement-learning-free framework that embeds human feedback, expressed as differentiable reward functions, directly into the 3D texture synthesis pipeline. By back-propagating preference signals through both geometric and appearance modules of the proposed framework, our method generates textures that respect the 3D geometry structure and align with desired criteria. To demonstrate its versatility, we introduce three novel geometry-aware reward functions, which offer a more controllable and interpretable pathway for creating high-quality 3D content from natural language. By conducting qualitative, quantitative, and user-preference evaluations against state-of-the-art methods, we demonstrate that our proposed strategy consistently outperforms existing approaches.">
+  <meta name="twitter:description" content="Recent 3D generative models produce high-quality textures for 3D mesh objects. However, they commonly rely on the heavy assumption that input 3D meshes are accompanied by manual mesh parameterization (UV mapping), a manual task that requires both technical precision and artistic judgment. Industry surveys show that this process often accounts for a significant share of asset creation, creating a major bottleneck for 3D content creators. Moreover, existing automatic methods often ignore two perceptually important criteria: (1) semantic awareness (UV charts should align semantically similar 3D parts across shapes) and (2) visibility awareness (cutting seams should lie in regions unlikely to be seen). To overcome these shortcomings and to automate the mesh parameterization process, we present an unsupervised differentiable framework that augments standard geometry-preserving UV learning with semantic- and visibility-aware objectives. For semantic-awareness, our pipeline (i) segments the mesh into semantic 3D parts, (ii) applies an unsupervised learned per-part UV-parameterization backbone, and (iii) aggregates per-part charts into a unified UV atlas. For visibility-awareness, we use ambient occlusion (AO) as an exposure proxy and back-propagate a soft differentiable AO-weighted seam objective to steer cutting seams toward occluded regions. By conducting qualitative and quantitative evaluations against state-of-the-art methods, we show that the proposed method produces UV atlases that better support texture generation and reduce perceptible seam artifacts compared to recent baselines.">
   <!-- TODO: Same as social preview image above -->
   <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
   <meta name="twitter:image:alt" content="PAPER_TITLE - Research Preview">
 
   <!-- Academic/Research Specific -->
-  <meta name="citation_title" content="While recent 3D generative models can produce high-quality texture images, they often fail to capture human preferences or meet task-specific requirements. Moreover, a core challenge in the 3D texture generation domain is that most existing approaches rely on repeated calls to 2D text-to-image generative models, which lack an inherent understanding of the 3D structure of the input 3D mesh object. To alleviate these issues, we propose an end-to-end differentiable, reinforcement-learning-free framework that embeds human feedback, expressed as differentiable reward functions, directly into the 3D texture synthesis pipeline. By back-propagating preference signals through both geometric and appearance modules of the proposed framework, our method generates textures that respect the 3D geometry structure and align with desired criteria. To demonstrate its versatility, we introduce three novel geometry-aware reward functions, which offer a more controllable and interpretable pathway for creating high-quality 3D content from natural language. By conducting qualitative, quantitative, and user-preference evaluations against state-of-the-art methods, we demonstrate that our proposed strategy consistently outperforms existing approaches.">
+  <meta name="citation_title" content="Recent 3D generative models produce high-quality textures for 3D mesh objects. However, they commonly rely on the heavy assumption that input 3D meshes are accompanied by manual mesh parameterization (UV mapping), a manual task that requires both technical precision and artistic judgment. Industry surveys show that this process often accounts for a significant share of asset creation, creating a major bottleneck for 3D content creators. Moreover, existing automatic methods often ignore two perceptually important criteria: (1) semantic awareness (UV charts should align semantically similar 3D parts across shapes) and (2) visibility awareness (cutting seams should lie in regions unlikely to be seen). To overcome these shortcomings and to automate the mesh parameterization process, we present an unsupervised differentiable framework that augments standard geometry-preserving UV learning with semantic- and visibility-aware objectives. For semantic-awareness, our pipeline (i) segments the mesh into semantic 3D parts, (ii) applies an unsupervised learned per-part UV-parameterization backbone, and (iii) aggregates per-part charts into a unified UV atlas. For visibility-awareness, we use ambient occlusion (AO) as an exposure proxy and back-propagate a soft differentiable AO-weighted seam objective to steer cutting seams toward occluded regions. By conducting qualitative and quantitative evaluations against state-of-the-art methods, we show that the proposed method produces UV atlases that better support texture generation and reduce perceptible seam artifacts compared to recent baselines.">
   <meta name="citation_author" content="Zamani, Amirhossein">
-  <meta name="citation_author" content="Xie, Tianhao">
-  <meta name="citation_author" content="Aghdam, Amir">
-  <meta name="citation_author" content="Popa, Tiberiu">
-  <meta name="citation_author" content="Belilovsky, Eugene">
+  <meta name="citation_author" content="Roy, Bruno">  
+  <meta name="citation_author" content="Rampini, Arianna">
   <meta name="citation_publication_date" content="2025">
-  <meta name="citation_conference_title" content="End-to-End Fine-Tuning of 3D Texture Generation using Differentiable Rewards">
+  <meta name="citation_conference_title" content="Unsupervised Representation Learning for 3D Mesh Parameterization with Semantic and Visibility Objectives">
   <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2506.18331">
   
   <!-- Additional SEO -->
@@ -77,7 +75,7 @@
 
 
   <!-- TODO: Replace with your paper title and authors -->
-  <title>End-to-End Fine-Tuning of 3D Texture Generation using Differentiable Rewards</title>
+  <title>Unsupervised Representation Learning for 3D Mesh Parameterization with Semantic and Visibility Objectives</title>
   
   <!-- Favicon and App Icons -->
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
@@ -117,8 +115,8 @@
   {
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
-    "headline": "End-to-End Fine-Tuning of 3D Texture Generation using Differentiable Rewards",
-    "description": "While recent 3D generative models can produce high-quality texture images, they often fail to capture human preferences or meet task-specific requirements. Moreover, a core challenge in the 3D texture generation domain is that most existing approaches rely on repeated calls to 2D text-to-image generative models, which lack an inherent understanding of the 3D structure of the input 3D mesh object. To alleviate these issues, we propose an end-to-end differentiable, reinforcement-learning-free framework that embeds human feedback, expressed as differentiable reward functions, directly into the 3D texture synthesis pipeline. By back-propagating preference signals through both geometric and appearance modules of the proposed framework, our method generates textures that respect the 3D geometry structure and align with desired criteria. To demonstrate its versatility, we introduce three novel geometry-aware reward functions, which offer a more controllable and interpretable pathway for creating high-quality 3D content from natural language. By conducting qualitative, quantitative, and user-preference evaluations against state-of-the-art methods, we demonstrate that our proposed strategy consistently outperforms existing approaches.",
+    "headline": "Unsupervised Representation Learning for 3D Mesh Parameterization with Semantic and Visibility Objectives",
+    "description": "Recent 3D generative models produce high-quality textures for 3D mesh objects. However, they commonly rely on the heavy assumption that input 3D meshes are accompanied by manual mesh parameterization (UV mapping), a manual task that requires both technical precision and artistic judgment. Industry surveys show that this process often accounts for a significant share of asset creation, creating a major bottleneck for 3D content creators. Moreover, existing automatic methods often ignore two perceptually important criteria: (1) semantic awareness (UV charts should align semantically similar 3D parts across shapes) and (2) visibility awareness (cutting seams should lie in regions unlikely to be seen). To overcome these shortcomings and to automate the mesh parameterization process, we present an unsupervised differentiable framework that augments standard geometry-preserving UV learning with semantic- and visibility-aware objectives. For semantic-awareness, our pipeline (i) segments the mesh into semantic 3D parts, (ii) applies an unsupervised learned per-part UV-parameterization backbone, and (iii) aggregates per-part charts into a unified UV atlas. For visibility-awareness, we use ambient occlusion (AO) as an exposure proxy and back-propagate a soft differentiable AO-weighted seam objective to steer cutting seams toward occluded regions. By conducting qualitative and quantitative evaluations against state-of-the-art methods, we show that the proposed method produces UV atlases that better support texture generation and reduce perceptible seam artifacts compared to recent baselines.",
     "author": [
       {
         "@type": "Person",
@@ -140,9 +138,9 @@
     "datePublished": "2025-12-05",
     "publisher": {
       "@type": "Organization",
-      "name": "IEEE/CFV Winter Conference on Applications of Computer Vision (WACV) 2026"
+      "name": "arXiv 2026"
     },
-    "url": "https://ahhhz975.github.io/DifferentiableTextureLearning/",
+    "url": "https://ahhhz975.github.io/Automatic3DMeshParameterization/",
     "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
     "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
     "abstract": "FULL_ABSTRACT_TEXT_HERE",
@@ -151,7 +149,7 @@
     "license": "https://creativecommons.org/licenses/by/4.0/",
     "mainEntity": {
       "@type": "WebPage",
-      "@id": "https://ahhhz975.github.io/DifferentiableTextureLearning/"
+      "@id": "https://ahhhz975.github.io/Automatic3DMeshParameterization/"
     },
     "about": [
       {
@@ -197,19 +195,17 @@
         <div class="columns is-centered">
           <div class="column has-text-centered">
             <!-- TODO: Replace with your paper title -->
-            <h1 class="title is-1 publication-title">End-to-End Fine-Tuning of 3D Texture Generation using Differentiable Rewards</h1>
+            <h1 class="title is-1 publication-title">Unsupervised Representation Learning for 3D Mesh Parameterization with Semantic and Visibility Objectives</h1>
             <div class="is-size-5 publication-authors">
               <!-- TODO: Replace with your paper authors and their personal links -->
               <span class="author-block"><a href="https://mila.quebec/en/directory/amirhossein-zamani" target="_blank">Amirhossein Zamani</a><sup>1,2*</sup>,</span>
-              <span class="author-block"><a href="https://tianhaoxie.github.io/" target="_blank">Tianhao Xie</a><sup>2</sup>,</span>
-              <span class="author-block"><a href="https://users.encs.concordia.ca/~aghdam/" target="_blank">Amir Aghdam</a><sup>2</sup>,</span>              
-              <span class="author-block"><a href="https://users.encs.concordia.ca/~stpopa/" target="_blank">Tiberiu Popa</a><sup>2</sup>,</span>
-              <span class="author-block"><a href="https://mila.quebec/en/directory/eugene-belilovsky" target="_blank">Eugene Belilovsky</a><sup>1,2</sup></span>
+              <span class="author-block"><a href="https://tianhaoxie.github.io/" target="_blank">Bruno Roy</a><sup>2</sup>,</span>
+              <span class="author-block"><a href="https://mila.quebec/en/directory/eugene-belilovsky" target="_blank">Arianna Rampini</a><sup>1,2</sup></span>
                   </div>
 
                   <div class="is-size-5 publication-authors">
                     <!-- TODO: Replace with your institution and conference/journal info -->                    
-                    <span class="author-block"><sup>1</sup> Mila – Quebec AI Institute; <sup>2</sup> Concordia University, Montreal, Canada <br><h1>IEEE/CFV Winter Conference on Applications of Computer Vision (WACV) 2026</h1></span>
+                    <span class="author-block"><sup>1</sup> Mila – Quebec AI Institute; <sup>2</sup> Concordia University, Montreal, Canada <br><h1>arXiv 2026</h1></span>
                     <!-- TODO: Remove this line if no equal contribution -->
                      <span class="eql-cntrb"><small><br><sup>*</sup>Corresponding Author</small></span>
                   </div>
@@ -218,7 +214,7 @@
                     <div class="publication-links">
                          <!-- TODO: Update with your arXiv paper ID -->
                       <span class="link-block">
-                        <a href="https://arxiv.org/pdf/2506.18331" target="_blank"
+                        <a href="https://arxiv.org/pdf/2509.25094" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
                         <span class="icon">
                           <i class="fas fa-file-pdf"></i>
@@ -229,7 +225,7 @@
 
                   <!-- TODO: Replace with your GitHub repository URL -->
                   <span class="link-block">
-                    <a href="https://github.com/AHHHZ975/Differentiable-Texture-Learning" target="_blank"
+                    <a href="https://github.com/AHHHZ975/Semantic-Visibility-UV-Param" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
@@ -240,7 +236,7 @@
 
                 <!-- TODO: Update with your arXiv paper ID -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/2506.18331" target="_blank"
+                  <a href="https://arxiv.org/pdf/2509.25094" target="_blank"
                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="ai ai-arxiv"></i>
