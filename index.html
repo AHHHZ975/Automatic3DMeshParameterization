@@ -373,16 +373,17 @@
       </p>
     </div>
 
-    <div class="hero-body">
+    <!-- <div class="hero-body">
       <!-- TODO: Replace with your teaser video -->
       <img src="static/images/Algorithm.png" alt="Algorithm" class="blend-img-background center-image">
-    </div>
+    </div> -->
     <div class="content has-text-justified">
       <p>
           A common perceptual failure of UV atlases is that seams positioned on exposed, well-lit, or frequently viewed regions create visible discontinuities once textures are applied. To address this,
           we introduce a visibility-aware objective that biases seam placement toward surface areas with low viewer exposure. As a proxy for visibility, we leverage ambient occlusion (AO), a standard geometric
-          measure of how much of the local hemisphere around a surface point is blocked by nearby geometry.          
-        
+          measure of how much of the local hemisphere around a surface point is blocked by nearby geometry. This objective guides the backbone to produce UV islands whose seams coincide with regions of low exposure,
+          thereby relocating cuts to less visible areas of the 3D surface and reducing perceptible seam artifacts after texturing and rendering.        
+          <br>
           Our training procedure consists of four steps: 
           <br>
           (i) compute per-vertex AO values on the input mesh: For each point (vertex) on the mesh surface, we define a hemisphere of outgoing directions (along with the normal direction at each vertex). Also we define
@@ -415,11 +416,8 @@
           After identifying soft seam memberships for each vertex, we encourage seams to lie in less visible regions of the surface. As a visibility proxy, we use per-vertex ambient occlusion values, computed in the first step, where 0 indicates fully occluded and $1$ indicates fully visible.
           The loss is then defined as the weighted average of occlusion values, using soft seam memberships as weights:
           <img src="static/images/AO_Loss.png" alt="AO Loss" class="blend-img-background center-image">
+          Intuitively, if the network assigns high seam weight to highly visible vertices (high AO), the loss is large. Conversely, assigning seam weight to occluded vertices (low AO) reduces the loss. Therefore, minimizing the loss function above guides seam placement toward regions of low exposure.
           <br><br>
-
-        
-          This objective guides the backbone to produce UV islands whose seams coincide with regions of low exposure, thereby relocating cuts to less visible areas of the 3D surface and reducing perceptible seam artifacts after texturing and rendering.
-          We now detail each step in turn.
       </p>
     </div>
     
