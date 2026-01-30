@@ -385,14 +385,25 @@
         
           Our training procedure consists of four steps: 
           <br>
-          (i) compute per-vertex AO values on the input mesh,
+          (i) compute per-vertex AO values on the input mesh: For each point (vertex) on the mesh surface, we define a hemisphere of outgoing directions (along with the normal direction at each vertex). Also we define
+          a binary visibiliy function V(p, w) as below at each point and direction on the mesh surface:
+          <div class="hero-body">
+            <!-- TODO: Replace with your teaser video -->
+            <img src="static/images/BinaryVisibilityFunction.png" alt="Binary Visibility Function" class="blend-img-background center-image">
+          </div>
+          The ambient occlusion exposure AO(p) is then defined as the cosine-weighted average visibility over the hemisphere:
+          <div class="hero-body">
+            <!-- TODO: Replace with your teaser video -->
+            <img src="static/images/AO_Formula.png" alt="AO Formula" class="blend-img-background center-image">
+          </div>
+      
           <br>
           (ii) apply a base UV-parameterization backbone to obtain candidate UV islands, 
           <br>
           (iii) extract UV boundary points corresponding to cutting seams,
           <br>
           (iv) compute and minimize the AO-weighted average over the associated 3D vertices. 
-          
+          <br>
           This objective guides the backbone to produce UV islands whose seams coincide with regions of low exposure, thereby relocating cuts to less visible areas of the 3D surface and reducing perceptible seam artifacts after texturing and rendering.
           We now detail each step in turn.
       </p>
