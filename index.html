@@ -333,8 +333,17 @@
           AO-weighted seam objective designed to steer cutting seams toward occluded regions. The proposed pipeline has two stages: (i) a neural surface-parameterization backbone enforces geometry-preserving properties, (ii) semantic-aware and visibility-aware modules provide
           task-specific (e.g., texture painting) guidance. 
           <br><br>
-          Given a 3D mesh M=(V,F) with vertex positions \(V\in\mathbb{R}^{N_v\times 3}\) (where \(N_v\) is the number of vertices), triangular faces \(F\in\mathbb{R}^{N_f\times 3}\) (where \(N_f\) is the number of faces), and per-vertex normals \(N\in\mathbb{R}^{N_v\times 3}\), our goal is to learn a pointwise UV parameterization \(u_{\theta}:V\rightarrow\mathbb{R}^2\) that maps each vertex in \(V\) to a 2D coordinate, producing UV coordinates \(Q\in\mathbb{R}^{N_v\times 2}\) with row-wise correspondence between \(V\) and \(Q\). We require the learned parameterization to satisfy the following properties during the learning process: \textit{(i) geometry preservation}, i.e., the parameterization should be low-distortion and ideally preserve classical geometric properties such as (a) \textit{isometry} (maintaining original edge lengths), (b) \textit{equiareal} (preserving triangle/facet areas), and (c) \textit{conformality} (preserving angles between edges); \textit{(ii) UV-space efficiency and bijectivity}, the mapping should (a) efficiently utilize the available UV domain, (b) avoid overlapping projections of distinct 3D points, and (c) be one-to-one so that each surface point maps to a unique UV location; \textit{(iii) high-quality cutting seams}, the parameterization should place seams in visually inconspicuous regions \citet{UV-AT, InvisibleSeams, Seamster}; and \textit{(iv) semantic awareness}, the UV mapping should semantically align 3D parts across different 3D mesh models to consistent regions in UV space to enable cross-shape correspondence 
-          
+          Given a 3D mesh M=(V,F) with vertex positions V, triangular faces F, and per-vertex normals N, our goal is to learn a pointwise UV parameterization u that maps each vertex in V to a 2D coordinate, producing UV coordinates Q with row-wise correspondence between V and Q.
+          We require the learned parameterization to satisfy the following properties during the learning process: 
+          <br>
+          (i) geometry preservation, i.e., the parameterization should be low-distortion and ideally preserve classical geometric properties such as (a) isometry (maintaining original edge lengths), (b) equiareal (preserving triangle/facet areas), and (c) conformality (preserving angles between edges).
+          <br>
+          (ii) UV-space efficiency and bijectivity, the mapping should (a) efficiently utilize the available UV domain, (b) avoid overlapping projections of distinct 3D points, and (c) be one-to-one so that each surface point maps to a unique UV location.
+          <br>
+          (iii) visibility awareness and high-quality cutting seams, the parameterization should place seams in visually inconspicuous regions.
+          <br>
+          (iv) semantic awareness, the UV mapping should semantically align 3D parts across different 3D mesh models to consistent regions in UV space to enable cross-shape correspondence.
+          <br>
         
       </p>
     </div>
