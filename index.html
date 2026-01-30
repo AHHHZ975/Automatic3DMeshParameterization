@@ -372,6 +372,32 @@
           An overview of the training process of the proposed semantic-aware UV parameterization method, consisting of three main stage: (i) semantic 3D partitioning, where we compute a per-vertex semantic partition of the input mesh using shape diameter function; (ii) geometry-preserving UV learning, where we apply the base UV-parameterization backbone independently to each semantic part to obtain per-part UV islands; and (iii) UV atlas aggregation and packing aggregate and pack these islands into a unified UV atlas.
       </p>
     </div>
+
+    <div class="hero-body">
+      <!-- TODO: Replace with your teaser video -->
+      <img src="static/images/Algorithm.png" alt="Algorithm" class="blend-img-background center-image">
+    </div>
+    <div class="content has-text-justified">
+      <p>
+          A common perceptual failure of UV atlases is that seams positioned on exposed, well-lit, or frequently viewed regions create visible discontinuities once textures are applied. To address this,
+          we introduce a visibility-aware objective that biases seam placement toward surface areas with low viewer exposure. As a proxy for visibility, we leverage ambient occlusion (AO), a standard geometric
+          measure of how much of the local hemisphere around a surface point is blocked by nearby geometry. 
+        
+          Our training procedure consists of four steps: 
+          <br>
+          (i) compute per-vertex AO values on the input mesh,
+          <br>
+          (ii) apply a base UV-parameterization backbone to obtain candidate UV islands, 
+          <br>
+          (iii) extract UV boundary points corresponding to cutting seams,
+          <br>
+          (iv) compute and minimize the AO-weighted average over the associated 3D vertices. 
+          
+          This objective guides the backbone to produce UV islands whose seams coincide with regions of low exposure, thereby relocating cuts to less visible areas of the 3D surface and reducing perceptible seam artifacts after texturing and rendering.
+          We now detail each step in turn.
+      </p>
+    </div>
+    
   </div>
 </section>
 <!-- End paper methodology -->
