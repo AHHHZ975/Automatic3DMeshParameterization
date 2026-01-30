@@ -399,7 +399,7 @@
           (iii) extract UV boundary points corresponding to cutting seams: We then extract cutting seams directly from the UV mapping learned in the previous step. This process has three steps: (a) neighbor selection, given a set of 3D surface
           points P with their corresponding UV coordinates Q, the method determines whether each vertex lies on a seam by exploring its neighborhood. For each 3D point p_i in P with UV coordinate q_i in Q, we first find its N nearest neighbors in 3D,
           with corresponding UV coordinates. (b) max UV distance computation,  we then compute the maximum UV distance between q_i and its neighbors:
-          <img src="static/images/Max_Equation" alt="Max Equation" class="blend-img-background center-image">
+          <img src="static/images/Max_Equation.png" alt="Max Equation" class="blend-img-background center-image">
           The intuition behind equation above is that, during training, at each iteration we must identify the cutting-seam (boundary) points in UV space in order to evaluate their ambient occlusion values and then compute the visibility-aware loss. 
           Minimizing this loss encourages the model to learn UV parameterizations whose seams lie in less-visible (low-AO) regions. Equation above provides a mechanism for detecting these seam points. Rather than locating seams directly on the 3D mesh,
           we detect them in the UV domain based on how local neighborhoods deform during unwrapping. Specifically, for each 3D vertex we know both its 3D coordinates and its corresponding UV coordinates at the current iteration. Therefore, we examine the
@@ -412,6 +412,9 @@
           (iv) compute and minimize the AO-weighted average over the associated 3D vertices: However, this maximization problem in the equation above is not inherently differentiable, so we introduce mathematical modifications to ensure differentiability during the
           learning process. Specifically, instead of a hard decision, we assign each vertex a differentiable soft seam membership score. The maximization problem can then be formulated as a differentiable function:
           <img src="static/images/Differentiable_Max_Equation.png" alt="Differentiable Max Equation" class="blend-img-background center-image">
+          After identifying soft seam memberships for each vertex, we encourage seams to lie in less visible regions of the surface. As a visibility proxy, we use per-vertex ambient occlusion values, computed in the first step, where 0 indicates fully occluded and $1$ indicates fully visible.
+          The loss is then defined as the weighted average of occlusion values, using soft seam memberships as weights:
+          <img src="static/images/AO_Loss.png" alt="AO Loss" class="blend-img-background center-image">
           <br><br>
 
         
