@@ -389,9 +389,12 @@
           <br><br>
           (ii) geometry-preserving UV learning, where we apply the base UV-parameterization backbone independently to each semantic 3D part to obtain per-part UV islands: For each semantic submesh, obtained from previous step, we 
           instantiate the base parameterization backbone, and optimize a part-specific mapping. Each part is trained with the same suite of differentiable objectives used for the global model. Therefore, we minimize the per-part loss:
-          <img src="static/images/PerPartParam.png" alt="Per-Part Parameterization Loss" class="blend-img-background center-image">
+          <img src="static/images/PerPartParam_Loss.png" alt="Per-Part Parameterization Loss" class="blend-img-background center-image">
           <br><br>
-          (iii) UV atlas aggregation and packing, where we aggregate and pack these islands into a unified UV atlas. We now describe each stage in detail
+          (iii) UV atlas aggregation and packing, where we aggregate and pack these islands into a unified UV atlas: After optimizing all parts, we obtain per-part UV islands (each normalized to the unit square) corrsponding to each 3D 
+          segmented part. These islands are merged into a single atlas by an atlas aggregator. For clarity and reproducibility our current aggregator is intentionally simple and deterministic: the final UV sheet is a unit square subdivided
+          into a G*G regular grid. We then assign each part k a unique grid cell indexed by row and column in row-major order. Each normalized island is placed into its assigned cell via a uniform similarity transform:
+          <img src="static/images/AtlasAggregator_Formula.png" alt="Atlas Aggregator Formula" class="blend-img-background center-image">
       </p>
     </div>
 
