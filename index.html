@@ -369,7 +369,29 @@
     </div>
     <div class="content has-text-justified">
       <p>
-          An overview of the training process of the proposed semantic-aware UV parameterization method, consisting of three main stage: (i) semantic 3D partitioning, where we compute a per-vertex semantic partition of the input mesh using shape diameter function; (ii) geometry-preserving UV learning, where we apply the base UV-parameterization backbone independently to each semantic part to obtain per-part UV islands; and (iii) UV atlas aggregation and packing aggregate and pack these islands into a unified UV atlas.
+          To encourage semantically coherent UV charts that simplify texture editing, transfer, and cross-object correspondence, we design a partition-and-parameterize pipeline (illustrated in figure above). 
+          Our semantic-aware parameterization has three stages:
+          <br><br>
+          (i) semantic 3D partitioning, where we compute a per-vertex semantic partition of the input mesh using the shape diameter function (ShDF): Given an input mesh M}=(V,F), we compute a semantic partition 
+          using the shape diameter function (ShDF) as our primary signal. Intuitively, the ShDF maps each surface sample to a scalar that estimates the local object thickness (the diameter of the object in the 
+          vicinity of that sample). Similar ShDF values typically indicate coherent semantic parts (e.g., limbs, body, handles), making the ShDF a practical cue for part-level partitioning of 3D shapes. 
+          Specifically, our 3D partitioning strategy consists of the following steps for the detailed explanation of each step: (a) compute local ShDF, we compute a local thickness (ShDF) per face via ray casting inside
+          a cone about the inward normal at each surface point and smoothing the samples for spatial coherence; (b) fit GMM, to obtain soft per-face class likelihoods, we use a 1-D Gaussian mixture model (GMM) to fit K 
+          (the deisred number of semantic components) Gaussians to the per-face thicknesses; (c) boundary smoothness cost, to bias the partition toward spatially coherent regions, we then combine these likelihoods with a
+          geometry-aware pairwise smoothness penalty (e.g., a dihedral-angle based boundary cost) on adjacent faces on the geometry to encourage coherent regions and penalize label changes across sharp edges. (d) initial 
+          labeling, we then assign each face to the GMM component with maximum probability (minimum negative log-likelihood). This produces a purely data-driven segmentation that is generally noisy but captures the major 
+          mode structure of the thickness field. (e) refine with graph cuts, we then refine the initial assignment by minimizing a global energy via iterative alpha-expansion, solving each expansion by an optimal min-cut. 
+          Repeating this process across labels and iterating a few times yields stable and low-energy 3D partitions. (f) Relabel connected components, after refinement, a single label index can correspond to multiple disconnected
+          components. To solve this issue, we relabel each connected component of faces so that every final label corresponds to a single connected sub-mesh. This guarantees that subsequent per-part processing operates on contiguous
+          regions. (g) Post-processing, to produce clean 3D segmentation results, we apply several simple post-processing heuristics to remove spurious tiny components that would complicate per-part UV parameterization. The output is
+          then a set of connected semantic sub-meshes suitable for the per-part UV parameterization stage. This high-level pipeline is simple, robust, and fast. We also evaluate two modern zero-shot segmentation baselines, SAMesh and 
+          PartField, as alternative partitioners and report comparative results in our ablation study.
+          <br><br>
+          (ii) geometry-preserving UV learning, where we apply the base UV-parameterization backbone independently to each semantic 3D part to obtain per-part UV islands: For each semantic submesh, obtained from previous step, we 
+          instantiate the base parameterization backbone, and optimize a part-specific mapping. Each part is trained with the same suite of differentiable objectives used for the global model. Therefore, we minimize the per-part loss:
+          <img src="static/images/PerPartParam.png" alt="Per-Part Parameterization Loss" class="blend-img-background center-image">
+          <br><br>
+          (iii) UV atlas aggregation and packing, where we aggregate and pack these islands into a unified UV atlas. We now describe each stage in detail
       </p>
     </div>
 
