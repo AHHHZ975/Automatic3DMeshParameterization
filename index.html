@@ -417,7 +417,7 @@
           The ambient occlusion exposure AO(p) is then defined as the cosine-weighted average visibility over the hemisphere:
           <img src="static/images/AO_Formula.png" alt="AO Formula" class="blend-img-background center-image">                    
           By this convention, AO(p)=1 indicates a fully exposed point (no occlusion) and AO(p)=0 indicates a fully occluded point. 
-          <img src="static/images/AmbientOcclusion_Visualization.png" alt="Ambient Occlusion Visualization" class="blend-img-background center-image">                    
+          <img src="static/images/AmbientOcclusion_Visualization.png" alt="Ambient Occlusion Visualization" class="blend-img-background center-image">
           <br><br>
           (ii) apply a base UV-parameterization backbone to obtain candidate UV islands: Once per-vertex AO values are computed, we generate the UV parameterization using the base backbone to obtain a potential UV parameterization candidate.
           <br><br>
@@ -433,6 +433,7 @@
           3D neighbors of each vertex and compare their mapped UV positions. If a pair of vertices are close neighbors on the 3D surface but become separated by more than a threshold distance in UV space, this indicates that the surface has been cut between them.
           We therefore mark such UV points as seam (boundary) points. This criterion is grounded in the fact that any valid unwrapping must introduce discontinuities (i.e., seams): vertices that are adjacent on the 3D surface become far apart in the UV plane after
           the mesh is cut open. Equation above formalizes this idea by detecting precisely those locations where this large separation occurs.
+          <img src="static/images/CutSeamExtract_Visualization.png" alt="Cutting Seam Extraction Visualization" class="blend-img-background center-image">
           <br><br>
 
           
