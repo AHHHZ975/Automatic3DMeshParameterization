@@ -488,8 +488,9 @@
         we detect them in the UV domain based on how local neighborhoods deform during unwrapping. Specifically, for each 3D vertex we know both its 3D coordinates and its corresponding UV coordinates at the current iteration. Therefore, we examine the
         3D neighbors of each vertex and compare their mapped UV positions. If a pair of vertices are close neighbors on the 3D surface but become separated by more than a threshold distance in UV space, this indicates that the surface has been cut between them.
         We therefore mark such UV points as seam (boundary) points. This criterion is grounded in the fact that any valid unwrapping must introduce discontinuities (i.e., seams): vertices that are adjacent on the 3D surface become far apart in the UV plane after
-        the mesh is cut open. Equation above formalizes this idea by detecting precisely those locations where this large separation occurs. The picture below shows a visualization of the cutting seam vertices of a 3D bunny in 3D space (right) and their corresponding
-        UV coordinates in the 2D UV space (left), highlighted in red. Other vertices and their corresponding UV points are shown in grey.
+        the mesh is cut open. Equation above formalizes this idea by detecting precisely those locations where this large separation occurs. 
+        <br><br>
+        The picture below shows a visualization of the cutting seam vertices of a 3D bunny in 3D space (right) and their corresponding UV coordinates in the 2D UV space (left), highlighted in red. Other vertices and their corresponding UV points are shown in grey.
       </p>
       
       <img src="static/images/CutSeamExtract_Visualization.png" alt="Cutting Seam Extraction Visualization" class="blend-img-background center-image" style="width: 85%; display: block; margin: 2rem auto;">
@@ -522,13 +523,18 @@
   <div class="container is-max-desktop">
      <div class="columns is-centered has-text-centered">
         <h2 class="title is-3">Comparative Results</h2>
+        <p>
+          We evaluate our unsupervised semantic- and visibility-aware UV parameterization pipelines on a diverse collection of meshes and compare against several baselines. 
+          We provide both qualitative and quantitative comparisons to: FlexPara (recent state-of-the-art global parameterization network), Autodesk Maya (industry-grade commercial software),
+          Blender (popular open-source modeling tool), and xatlas (widely-used C++ library for generating unique texture coordinates suitable for lightmap baking and texture painting).
+        </p>
      </div>
     
-    <h2 class="subtitle has-text-centered"> Qualitative Comparison of Visibility-Aware UV Parameterization </h2>
+    <h3> Qualitative Comparison of Visibility-Aware UV Parameterization </h3>
     <div class="hero-body">      
       <img src="static/images/ICLR_AO_UV_Seams_Figure_v1.1.png" alt="Comparative results" class="blend-img-background center-image">
       <div class="content has-text-justified">          
-        <p>
+        <p>          
           Qualitative results for visibility-aware seam placement and UV parameterization on three representative meshes. For each mesh, the top row shows per-vertex ambient occlusion (yellow = exposed, purple = occluded). Beneath are the visualizations of cutting seams (red) from our method, FlexPara, and OptCuts (top to bottom). Our method places a larger fraction of seam geometry in less-exposed regions, reducing the likelihood of visible seam artifacts under typical viewpoints.
         </p>
       </div>
