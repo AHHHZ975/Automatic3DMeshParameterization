@@ -408,7 +408,7 @@
       <img src="static/images/ICLR_Approach_Overview_v1.1.png" alt="Training overview" class="blend-img-background center-image">
       
       <p>          
-          (i) semantic 3D partitioning, where we compute a per-vertex semantic partition of the input mesh using the shape diameter function (ShDF): Given an input mesh M}=(V,F), we compute a semantic partition 
+          <strong> Stage 1: Semantic 3D partitioning</strong>, where we compute a per-vertex semantic partition of the input mesh using the shape diameter function (ShDF): Given an input mesh M}=(V,F), we compute a semantic partition 
           using the shape diameter function (ShDF) as our primary signal. Intuitively, the ShDF maps each surface sample to a scalar that estimates the local object thickness (the diameter of the object in the 
           vicinity of that sample). Similar ShDF values typically indicate coherent semantic parts (e.g., limbs, body, handles), making the ShDF a practical cue for part-level partitioning of 3D shapes. 
           Specifically, our 3D partitioning strategy consists of the following steps for the detailed explanation of each step: (a) compute local ShDF, we compute a local thickness (ShDF) per face via ray casting inside
@@ -423,14 +423,14 @@
           then a set of connected semantic sub-meshes suitable for the per-part UV parameterization stage. This high-level pipeline is simple, robust, and fast. We also evaluate two modern zero-shot segmentation baselines, SAMesh and 
           PartField, as alternative partitioners and report comparative results in our ablation study.
           <br><br>
-          (ii) geometry-preserving UV learning, where we apply the base UV-parameterization backbone independently to each semantic 3D part to obtain per-part UV islands: For each semantic submesh, obtained from previous step, we 
+          <strong> Stage 2: Geometry-preserving UV learning</strong>, where we apply the base UV-parameterization backbone independently to each semantic 3D part to obtain per-part UV islands: For each semantic submesh, obtained from previous step, we 
           instantiate the base parameterization backbone, and optimize a part-specific mapping. Each part is trained with the same suite of differentiable objectives used for the global model. Therefore, we minimize the per-part loss:
       </p>
           
       <img src="static/images/PerPartParam_Loss.png" alt="Per-Part Parameterization Loss" class="blend-img-background center-image" style="width: 60%; display: block; margin: 2rem auto;">
       
       <p>          
-          (iii) UV atlas aggregation and packing, where we aggregate and pack these islands into a unified UV atlas: After optimizing all parts, we obtain per-part UV islands (each normalized to the unit square) corrsponding to each 3D 
+          <strong> Stage 3: UV atlas aggregation and packing</strong>, where we aggregate and pack these islands into a unified UV atlas: After optimizing all parts, we obtain per-part UV islands (each normalized to the unit square) corrsponding to each 3D 
           segmented part. These islands are merged into a single atlas by an atlas aggregator. For clarity and reproducibility our current aggregator is intentionally simple and deterministic: the final UV sheet is a unit square subdivided
           into a G*G regular grid. We then assign each part k a unique grid cell indexed by row and column in row-major order. Each normalized island is placed into its assigned cell via a uniform similarity transform:          
       </p>
