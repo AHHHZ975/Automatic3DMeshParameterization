@@ -295,7 +295,24 @@
         <div class="content has-text-justified">
           <!-- TODO: Replace with your paper abstract -->
           <p>
-                Recent 3D generative models produce high-quality textures for 3D mesh objects. However, they commonly rely on the heavy assumption that input 3D meshes are accompanied by manual mesh parameterization (UV mapping), a manual task that requires both technical precision and artistic judgment. Industry surveys show that this process often accounts for a significant share of asset creation, creating a major bottleneck for 3D content creators. Moreover, existing automatic methods often ignore two perceptually important criteria: (1) semantic awareness (UV charts should align semantically similar 3D parts across shapes) and (2) visibility awareness (cutting seams should lie in regions unlikely to be seen). To overcome these shortcomings and to automate the mesh parameterization process, we present an unsupervised differentiable framework that augments standard geometry-preserving UV learning with semantic- and visibility-aware objectives. For semantic-awareness, our pipeline (i) segments the mesh into semantic 3D parts, (ii) applies an unsupervised learned per-part UV-parameterization backbone, and (iii) aggregates per-part charts into a unified UV atlas. For visibility-awareness, we use ambient occlusion (AO) as an exposure proxy and back-propagate a soft differentiable AO-weighted seam objective to steer cutting seams toward occluded regions. By conducting qualitative and quantitative evaluations against state-of-the-art methods, we show that the proposed method produces UV atlases that better support texture generation and reduce perceptible seam artifacts compared to recent baselines.
+                Recent 3D generative models produce high-quality textures for 3D mesh objects. 
+                However, they commonly rely on the heavy assumption that input 3D meshes are 
+                accompanied by manual mesh parameterization (UV mapping), a manual task that 
+                requires both technical precision and artistic judgment. Industry surveys show
+                that this process often accounts for a significant share of asset creation, 
+                creating a major bottleneck for 3D content creators. Moreover, existing automatic
+                methods often ignore two perceptually important criteria: (1) semantic awareness
+                (UV charts should align semantically similar 3D parts across shapes) and (2) visibility
+                awareness (cutting seams should lie in regions unlikely to be seen). To overcome these
+                shortcomings and to automate the mesh parameterization process, we present an unsupervised
+                differentiable framework that augments standard geometry-preserving UV learning with semantic-
+                and visibility-aware objectives. For semantic-awareness, our pipeline (i) segments the mesh into
+                semantic 3D parts, (ii) applies an unsupervised learned per-part UV-parameterization backbone, and
+                (iii) aggregates per-part charts into a unified UV atlas. For visibility-awareness, we use ambient
+                occlusion (AO) as an exposure proxy and back-propagate a soft differentiable AO-weighted seam
+                objective to steer cutting seams toward occluded regions. By conducting qualitative and quantitative
+                evaluations against state-of-the-art methods, we show that the proposed method produces UV atlases
+                that better support texture generation and reduce perceptible seam artifacts compared to recent baselines.
           </p>
         </div>
       </div>
@@ -312,8 +329,13 @@
     </div>
     <div class="content has-text-justified">
       <p>
-        We first begin with a definition. Texture mapping, also referred to as UV/Mesh parameterization, is the process of converting a 3D mesh surface into a 2D image (as shown in the picture above). It is a core step in digital 3D content production, 
-        enabling texture synthesis, painting, transfer, and high-quality rendering.
+        We first begin with a definition. Texture mapping, also referred to as UV/Mesh parameterization, is the process of converting a 3D mesh surface into a 2D image. It is a core step in digital 3D content production, 
+        enabling texture synthesis, painting, transfer, and high-quality rendering. For example, as shown in the top row of the figure below, given a raw 3D sphere mesh, the goal is to texture the sphere using a world map
+        image. This task is relatively straightforward for a 3D artist or designer, as mapping pixels from a 2D texture image to vertices on a spherical surface is largely intuitive for humans. However, as the 3D geometry
+        becomes more complex, such as the dragon shown in the bottom row of the figure, the problem of establishing a correspondence between the texture image and the 3D mesh becomes significantly more challenging. This process
+        requires careful consideration of many factors, including surface continuity, distortion, and cutting seam placement. As a result, UV mapping poses two major challenges for UV/layout artists, designers, engineers, and others
+        working with 3D assets: (1) the time required to design an effective mapping between 3D and 2D spaces increases substantially with geometric complexity, and (2) there is no generalized solution to this problem, requiring
+        artists to manually design a custom mapping for each individual 3D object.
       </p>
       
       <img src="static/images/TextureMapping.jpg" alt="Texture Mapping" class="blend-img-background center-image" style="width: 90%; display: block; margin: 2rem auto;">
