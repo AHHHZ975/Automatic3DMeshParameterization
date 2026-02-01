@@ -297,7 +297,7 @@
         enabling texture synthesis, painting, transfer, and high-quality rendering.
       </p>
       
-      <img src="static/images/TextureMapping.jpg" alt="Texture Mapping" class="blend-img-background center-image" style="width: 80%; display: block; margin: 2rem auto;">
+      <img src="static/images/TextureMapping.jpg" alt="Texture Mapping" class="blend-img-background center-image" style="width: 90%; display: block; margin: 2rem auto;">
       
       <p>        
         While recent 3D generative methods can produce high-quality textures for 3D mesh objects (as shown in the picture below), they commonly rely on the heavy assumption that input 3D meshes are accompanied by the mesh parameterization process that requires
@@ -305,7 +305,7 @@
         a significant share of asset creation (up to ~60% of the overall 3D content production pipeline), creating a major bottleneck for 3D content creators.
       </p>
       
-      <img src="static/images/UV_Texture_Joint_Optimization.jpg" alt="UV Texture Joint Optimization" class="blend-img-background center-image">          
+      <img src="static/images/UV_Texture_Joint_Optimization.jpg" alt="UV Texture Joint Optimization" class="blend-img-background center-image" style="width: 100%; display: block; margin: 2rem auto;">          
 
       <p>
         Therefore, the research question we aim to address in this study is: Can we automate UV mapping in 3D content creation using AI in a way that satisfies the properties required by downstream tasks (e.g., texture synthesis),
@@ -331,28 +331,31 @@
           Thus, what these properties enforce during this 3D-to-2D mapping process is that these triangular facets should be mapped into the 2D space in such a way that the overall distortion of all mapped triangular faces is minimized. This distortion includes preserving
           the triangular edge lengths as much as possible (isometricity), keeping the angles between each pair of edges nearly unchanged (conformality), and maintaining the area of each facet (equiareality). Moreover, bijectivity means that the mapping should be one-to-one,
           so that each surface point maps to a unique UV location. Once all these four properties are satisfied, we say that the specific UV mapping is geometry-preserving.
-          <img src="static/images/TriangularMesh_Parameterization.png" alt="Triangular Mesh Parameterization" class="blend-img-background center-image">
-          However, we would argue that while these properties are necessary to achieve a high-quality mesh parameterization, they are not sufficient for many downstream applications in content creation and texture synthesis. In particular, two perceptual criteria are often
-          neglected: (1) semantic awareness, 2D UV charts should align with semantically meaningful surface 3D parts so that textures designed for a semantic region remain coherent and transferable across 3D shapes; and (2) visibility awareness, cutting seams should
-          be placed where they are unlikely to be observed under typical viewpoints and lighting, so that seam artifacts are less perceptible after texturing and rendering.
-          <br><br>
-          To overcome these shortcomings, we present an unsupervised differentiable framework that augments standard geometry-preserving UV learning with semantic- and visibility-aware objectives. For semantic-awareness, our pipeline (i) segments the mesh into semantic
-          3D parts, (ii) applies an unsupervised learned per-part UV-parameterization backbone, and (iii) aggregates per-part charts into a unified UV atlas. For visibility-awareness, we use ambient occlusion (AO) as an exposure proxy and back-propagate a soft differentiable
-          AO-weighted seam objective designed to steer cutting seams toward occluded regions. The proposed pipeline has two stages: (i) a neural surface-parameterization backbone enforces geometry-preserving properties, (ii) semantic-aware and visibility-aware modules provide
-          task-specific (e.g., texture painting) guidance. 
-          <br><br>
-          Formally, we state the problem as follows: Given a 3D mesh M=(V,F) with vertex positions V, triangular faces F, and per-vertex normals N, our goal is to learn a pointwise UV parameterization u that maps each vertex in V to a 2D coordinate, producing UV coordinates Q with
-          row-wise correspondence between V and Q. We require the learned parameterization to satisfy the following properties during the learning process: 
-          <br>
-          (i) geometry preservation, i.e., the parameterization should be low-distortion and ideally preserve classical geometric properties such as (a) isometry (maintaining original edge lengths), (b) equiareal (preserving triangle/facet areas), and (c) conformality (preserving angles between edges).
-          <br>
-          (ii) UV-space efficiency and bijectivity, the mapping should (a) efficiently utilize the available UV domain, (b) avoid overlapping projections of distinct 3D points, and (c) be one-to-one so that each surface point maps to a unique UV location.
-          <br>
-          (iii) visibility awareness and high-quality cutting seams, the parameterization should place seams in visually inconspicuous regions.
-          <br>
-          (iv) semantic awareness, the UV mapping should semantically align 3D parts across different 3D mesh models to consistent regions in UV space to enable cross-shape correspondence.
-          <br>
+      </p>
         
+      <img src="static/images/TriangularMesh_Parameterization.png" alt="Triangular Mesh Parameterization" class="blend-img-background center-image" style="width: 95%; display: block; margin: 2rem auto;">
+      
+      <p>
+        However, we would argue that while these properties are necessary to achieve a high-quality mesh parameterization, they are not sufficient for many downstream applications in content creation and texture synthesis. In particular, two perceptual criteria are often
+        neglected: (1) semantic awareness, 2D UV charts should align with semantically meaningful surface 3D parts so that textures designed for a semantic region remain coherent and transferable across 3D shapes; and (2) visibility awareness, cutting seams should
+        be placed where they are unlikely to be observed under typical viewpoints and lighting, so that seam artifacts are less perceptible after texturing and rendering.
+        <br><br>
+        To overcome these shortcomings, we present an unsupervised differentiable framework that augments standard geometry-preserving UV learning with semantic- and visibility-aware objectives. For semantic-awareness, our pipeline (i) segments the mesh into semantic
+        3D parts, (ii) applies an unsupervised learned per-part UV-parameterization backbone, and (iii) aggregates per-part charts into a unified UV atlas. For visibility-awareness, we use ambient occlusion (AO) as an exposure proxy and back-propagate a soft differentiable
+        AO-weighted seam objective designed to steer cutting seams toward occluded regions. The proposed pipeline has two stages: (i) a neural surface-parameterization backbone enforces geometry-preserving properties, (ii) semantic-aware and visibility-aware modules provide
+        task-specific (e.g., texture painting) guidance. 
+        <br><br>
+        Formally, we state the problem as follows: Given a 3D mesh M=(V,F) with vertex positions V, triangular faces F, and per-vertex normals N, our goal is to learn a pointwise UV parameterization u that maps each vertex in V to a 2D coordinate, producing UV coordinates Q with
+        row-wise correspondence between V and Q. We require the learned parameterization to satisfy the following properties during the learning process: 
+        <br>
+        (i) geometry preservation, i.e., the parameterization should be low-distortion and ideally preserve classical geometric properties such as (a) isometry (maintaining original edge lengths), (b) equiareal (preserving triangle/facet areas), and (c) conformality (preserving angles between edges).
+        <br>
+        (ii) UV-space efficiency and bijectivity, the mapping should (a) efficiently utilize the available UV domain, (b) avoid overlapping projections of distinct 3D points, and (c) be one-to-one so that each surface point maps to a unique UV location.
+        <br>
+        (iii) visibility awareness and high-quality cutting seams, the parameterization should place seams in visually inconspicuous regions.
+        <br>
+        (iv) semantic awareness, the UV mapping should semantically align 3D parts across different 3D mesh models to consistent regions in UV space to enable cross-shape correspondence.
+        <br>
       </p>
     </div>
   </div>
