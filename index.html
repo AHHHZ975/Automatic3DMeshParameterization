@@ -336,7 +336,7 @@
         requires careful consideration of many factors, including surface continuity, distortion, and cutting seam placement. As a result, UV mapping poses two major challenges for UV/layout artists, designers, engineers, and others
         working with 3D assets: (1) the time required to design an effective mapping between 3D and 2D spaces increases substantially with geometric complexity, and (2) there is no generalized solution to this problem, requiring
         artists to manually design a custom mapping for each individual 3D object.
-      </p>
+      </p>      
       
       <img src="static/images/TextureMapping.jpg" alt="Texture Mapping" class="blend-img-background center-image" style="width: 90%; display: block; margin: 2rem auto;">
       
@@ -349,8 +349,9 @@
       <img src="static/images/UV_Texture_Joint_Optimization.jpg" alt="UV Texture Joint Optimization" class="blend-img-background center-image" style="width: 95%; display: block; margin: 2rem auto;">          
 
       <p>
-        Therefore, the research question we aim to address in this study is: Can we automate UV mapping in 3D content creation using AI in a way that satisfies the properties required by downstream tasks (e.g., texture synthesis),
-        with the goal of accelerating and simplifying the workflows of UV/layout and modeling artists?
+        Therefore, the research question we aim to address in this study is: 
+        <strong>Can we automate UV mapping in 3D content creation using AI in a way that satisfies the properties required by downstream tasks (e.g., texture synthesis),
+        with the goal of accelerating and simplifying the workflows of UV/layout and modeling artists?</strong>
       </p>
     </div>
   </div>
@@ -384,19 +385,7 @@
         To overcome these shortcomings, we present an unsupervised differentiable framework that augments standard geometry-preserving UV learning with semantic- and visibility-aware objectives. For semantic-awareness, our pipeline (i) segments the mesh into semantic
         3D parts, (ii) applies an unsupervised learned per-part UV-parameterization backbone, and (iii) aggregates per-part charts into a unified UV atlas. For visibility-awareness, we use ambient occlusion (AO) as an exposure proxy and back-propagate a soft differentiable
         AO-weighted seam objective designed to steer cutting seams toward occluded regions. The proposed pipeline has two stages: (i) a neural surface-parameterization backbone enforces geometry-preserving properties, (ii) semantic-aware and visibility-aware modules provide
-        task-specific (e.g., texture painting) guidance. 
-        <br><br>
-        Formally, we state the problem as follows: Given a 3D mesh M=(V,F) with vertex positions V, triangular faces F, and per-vertex normals N, our goal is to learn a pointwise UV parameterization u that maps each vertex in V to a 2D coordinate, producing UV coordinates Q with
-        row-wise correspondence between V and Q. We require the learned parameterization to satisfy the following properties during the learning process: 
-        <br>
-        (i) geometry preservation, i.e., the parameterization should be low-distortion and ideally preserve classical geometric properties such as (a) isometry (maintaining original edge lengths), (b) equiareal (preserving triangle/facet areas), and (c) conformality (preserving angles between edges).
-        <br>
-        (ii) UV-space efficiency and bijectivity, the mapping should (a) efficiently utilize the available UV domain, (b) avoid overlapping projections of distinct 3D points, and (c) be one-to-one so that each surface point maps to a unique UV location.
-        <br>
-        (iii) visibility awareness and high-quality cutting seams, the parameterization should place seams in visually inconspicuous regions.
-        <br>
-        (iv) semantic awareness, the UV mapping should semantically align 3D parts across different 3D mesh models to consistent regions in UV space to enable cross-shape correspondence.
-        <br>
+        task-specific (e.g., texture painting) guidance.
       </p>
     </div>
   </div>
