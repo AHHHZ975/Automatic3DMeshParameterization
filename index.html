@@ -524,23 +524,23 @@
      <div class="columns is-centered has-text-centered">
         <h2 class="title is-3">Comparative Results</h2>
      </div>
-        
-    <div class="hero-body">
+    
+      <div class="content has-text-justified">
         <p>
-          We evaluate our unsupervised semantic- and visibility-aware UV parameterization pipelines on a diverse collection of meshes and compare against several baselines. 
+          We evaluate our unsupervised semantic- and visibility-aware UV parameterization pipelines on a diverse collection of meshes and compare against several baselines.
           We provide both qualitative and quantitative comparisons to: FlexPara (recent state-of-the-art global parameterization network), Autodesk Maya (industry-grade commercial software),
           Blender (popular open-source modeling tool), and xatlas (widely-used C++ library for generating unique texture coordinates suitable for lightmap baking and texture painting).
         </p>
 
-      <h3> Qualitative Comparison of Visibility-Aware UV Parameterization </h3>
-      
-      <img src="static/images/ICLR_AO_UV_Seams_Figure_v1.1.png" alt="Comparative results" class="blend-img-background center-image">
-      <div class="content has-text-justified">          
+        <h3> Qualitative Comparison of Visibility-Aware UV Parameterization </h3>
+
+        <img src="static/images/ICLR_AO_UV_Seams_Figure_v1.1.png" alt="Comparative results" class="blend-img-background center-image">
         <p>          
-          Qualitative results for visibility-aware seam placement and UV parameterization on three representative meshes. For each mesh, the top row shows per-vertex ambient occlusion (yellow = exposed, purple = occluded). Beneath are the visualizations of cutting seams (red) from our method, FlexPara, and OptCuts (top to bottom). Our method places a larger fraction of seam geometry in less-exposed regions, reducing the likelihood of visible seam artifacts under typical viewpoints.
+          Qualitative results for visibility-aware seam placement and UV parameterization on three representative meshes. For each mesh, the top row shows per-vertex ambient occlusion (yellow = exposed, purple = occluded).
+          Beneath are the visualizations of cutting seams (red) from our method, FlexPara, and OptCuts (top to bottom). Our method places a larger fraction of seam geometry in less-exposed regions, reducing the likelihood
+          of visible seam artifacts under typical viewpoints.
         </p>
-      </div>
-    </div>
+      </div>    
 
 
     <h2 class="subtitle has-text-centered"> Qualitative Comparison of Semantic-Aware UV Parameterization </h2>
