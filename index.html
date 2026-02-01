@@ -346,10 +346,10 @@
         a significant share of asset creation (up to ~60% of the overall 3D content production pipeline), creating a major bottleneck for 3D content creators.
       </p>
       
-      <img src="static/images/UV_Texture_Joint_Optimization.jpg" alt="UV Texture Joint Optimization" class="blend-img-background center-image" style="width: 95%; display: block; margin: 2rem auto;">          
+      <img src="static/images/UV_Texture_Joint_Optimization.jpg" alt="UV Texture Joint Optimization" class="blend-img-background center-image" style="width: 95%; display: block; margin: 2rem auto;">
 
       <p>
-        Therefore, the research question we aim to address in this study is: 
+        Therefore, the research question we aim to address in this study is:
         <strong>Can we automate UV mapping in 3D content creation using AI in a way that satisfies the properties required by downstream tasks (e.g., texture synthesis),
         with the goal of accelerating and simplifying the workflows of UV/layout and modeling artists?</strong>
       </p>
@@ -443,17 +443,15 @@
       
       <h3>Visibility-Aware UV Parameterization Pipeline</h3>
       
-      <img src="static/images/Algorithm.png" alt="Algorithm" class="blend-img-background center-image" style="width: 40%; display: block; margin: 2rem auto;">
-      
       <p>
           A common perceptual failure of UV atlases is that seams positioned on exposed, well-lit, or frequently viewed regions create visible discontinuities once textures are applied. To address this,
           we introduce a visibility-aware objective that biases seam placement toward surface areas with low viewer exposure. As a proxy for visibility, we leverage ambient occlusion (AO), a standard geometric
           measure of how much of the local hemisphere around a surface point is blocked by nearby geometry. This objective guides the backbone to produce UV islands whose seams coincide with regions of low exposure,
-          thereby relocating cuts to less visible areas of the 3D surface and reducing perceptible seam artifacts after texturing and rendering.        
+          thereby relocating cuts to less visible areas of the 3D surface and reducing perceptible seam artifacts after texturing and rendering.
           <br>
-          Our training procedure consists of four steps: 
+          Our training procedure consists of four steps:
           <br>
-          (i) compute per-vertex AO values on the input mesh: For each point (vertex) on the mesh surface, we define a hemisphere of outgoing directions (along with the normal direction at each vertex). Also we define
+          <strong> Step 1 - Compute per-vertex AO values on the input mesh:</strong> For each point (vertex) on the mesh surface, we define a hemisphere of outgoing directions (along with the normal direction at each vertex). Also we define
           a binary visibiliy function V(p, w) as below at each point and direction on the mesh surface:
       </p>
           
@@ -472,9 +470,9 @@
       <img src="static/images/AmbientOcclusion_Visualization.png" alt="Ambient Occlusion Visualization" class="blend-img-background center-image" style="width: 95%; display: block; margin: 2rem auto;">
       
       <p>    
-        (ii) apply a base UV-parameterization backbone to obtain candidate UV islands: Once per-vertex AO values are computed, we generate the UV parameterization using the base backbone to obtain a potential UV parameterization candidate.
+        <strong> Step 2 - Apply a base UV-parameterization backbone to obtain candidate UV islands:</strong> Once per-vertex AO values are computed, we generate the UV parameterization using the base backbone to obtain a potential UV parameterization candidate.
         <br><br>
-        (iii) extract UV boundary points corresponding to cutting seams: We then extract cutting seams directly from the UV mapping learned in the previous step. This process has three steps: (a) neighbor selection, given a set of 3D surface
+        <strong> Step 3 - Extract UV boundary points corresponding to cutting seams:</strong> We then extract cutting seams directly from the UV mapping learned in the previous step. This process has three steps: (a) neighbor selection, given a set of 3D surface
         points P with their corresponding UV coordinates Q, the method determines whether each vertex lies on a seam by exploring its neighborhood. For each 3D point p_i in P with UV coordinate q_i in Q, we first find its N nearest neighbors in 3D,
         with corresponding UV coordinates. (b) max UV distance computation,  we then compute the maximum UV distance between q_i and its neighbors:
       </p>
@@ -493,7 +491,7 @@
       <img src="static/images/CutSeamExtract_Visualization.png" alt="Cutting Seam Extraction Visualization" class="blend-img-background center-image" style="width: 85%; display: block; margin: 2rem auto;">
       
       <p>
-        (iv) compute and minimize the AO-weighted average over the associated 3D vertices: However, this maximization problem in the equation above is not inherently differentiable, so we introduce mathematical modifications to ensure differentiability during the
+        <strong> Step 4 - Compute and minimize the AO-weighted average over the associated 3D vertices:</strong>: However, this maximization problem in the equation above is not inherently differentiable, so we introduce mathematical modifications to ensure differentiability during the
         learning process. Specifically, instead of a hard decision, we assign each vertex a differentiable soft seam membership score. The maximization problem can then be formulated as a differentiable function:
       </p>
   
@@ -503,7 +501,7 @@
         The loss is then defined as the weighted average of occlusion values, using soft seam memberships as weights:
       </p>
         
-      <img src="static/images/AO_Loss.png" alt="AO Loss" class="blend-img-background center-image" style="width: 30%; display: block; margin: 2rem auto;">
+      <img src="static/images/AO_Loss.png" alt="AO Loss" class="blend-img-background center-image" style="width: 20%; display: block; margin: 2rem auto;">
       
       <p>
         Intuitively, if the network assigns high seam weight to highly visible vertices (high AO), the loss is large. Conversely, assigning seam weight to occluded vertices (low AO) reduces the loss. Therefore, minimizing the loss function above guides seam placement toward regions of low exposure.
