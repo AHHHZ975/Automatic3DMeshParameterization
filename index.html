@@ -399,13 +399,15 @@
       <h2 class="title is-3">Methodology</h2>
     </div>
     <div class="content has-text-justified">
+
+      <p>
+        To encourage semantically coherent UV charts that simplify texture editing, transfer, and cross-object correspondence, we design a partition-and-parameterize pipeline (illustrated in figure above). 
+        Our semantic-aware parameterization has three stages:
+      </p>
       
       <img src="static/images/ICLR_Approach_Overview_v1.1.png" alt="Training overview" class="blend-img-background center-image">
       
-      <p>
-          To encourage semantically coherent UV charts that simplify texture editing, transfer, and cross-object correspondence, we design a partition-and-parameterize pipeline (illustrated in figure above). 
-          Our semantic-aware parameterization has three stages:
-          <br><br>
+      <p>          
           (i) semantic 3D partitioning, where we compute a per-vertex semantic partition of the input mesh using the shape diameter function (ShDF): Given an input mesh M}=(V,F), we compute a semantic partition 
           using the shape diameter function (ShDF) as our primary signal. Intuitively, the ShDF maps each surface sample to a scalar that estimates the local object thickness (the diameter of the object in the 
           vicinity of that sample). Similar ShDF values typically indicate coherent semantic parts (e.g., limbs, body, handles), making the ShDF a practical cue for part-level partitioning of 3D shapes. 
