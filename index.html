@@ -84,38 +84,7 @@
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-
-  <!-- Small styles to force header fixedness and ensure layout spacing -->
-  <style>
-    /* Force the top logos to be fixed to the viewport */
-    #top-logos {
-      position: fixed !important;
-      top: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 16px;
-      z-index: 99999;
-      background: rgba(255,255,255,0.0); /* keep transparent; change to rgba(255,255,255,0.9) if you want opaque */
-      pointer-events: auto;
-      -webkit-transform: none !important;
-      transform: none !important;
-    }
-
-    /* Ensure the content doesn't get hidden under the fixed header */
-    main#main-content {
-      padding-top: 72px; /* adjust if you change logo height */
-    }
-
-    /* Optional: slightly reduce logo images on very small screens */
-    @media (max-width: 480px) {
-      #top-logos img { height: 36px !important; }
-      main#main-content { padding-top: 64px; }
-    }
-  </style>
-
+  
   <!-- Non-critical CSS - Load asynchronously -->
   <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -140,28 +109,7 @@
   <script defer src="static/js/bulma-carousel.min.js"></script>
   <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/index.js"></script>
-
-  <!-- small script to ensure #top-logos is a direct child of body (avoids transformed ancestor bugs) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var el = document.getElementById('top-logos');
-      if (!el) return;
-      // move to be first child of body if necessary
-      if (el.parentElement !== document.body) {
-        document.body.insertBefore(el, document.body.firstChild);
-      }
-      // warn about transformed ancestors (these can break fixed positioning)
-      var cur = el.parentElement;
-      while (cur && cur !== document.documentElement) {
-        var cs = getComputedStyle(cur);
-        if (cs.transform && cs.transform !== 'none') {
-          console.warn('Ancestor with transform found (may cause fixed to act like absolute):', cur, cs.transform);
-        }
-        cur = cur.parentElement;
-      }
-    });
-  </script>
-
+  
   <!-- Structured Data for Academic Papers -->
   <script type="application/ld+json">
   {
@@ -233,35 +181,14 @@
 </head>
 <body>
 
-    <div id="top-logos"
-      style="position:fixed; top:0; left:0; right:0;
-      display:flex; justify-content:space-between; align-items:center;
-      padding:8px 16px; z-index:9999;
-      background: rgba(255,255,255,0.0);
-      pointer-events:auto;">
-      
-      <!-- LEFT logo -->
-      <a href="/" style="display:inline-block; line-height:0;">
-        <img src="static/images/Autodesk_Logo.jpg" alt="Left logo" style="height:48px; width:auto; display:block;">
-      </a>
-      
-      <!-- TWO RIGHT logos, side-by-side -->
-      <div style="display:flex; gap:10px; align-items:center;">
-        <a href="https://example.com/partner1" style="display:inline-block; line-height:0;">
-          <img src="static/images/Mila_Logo.png" alt="Right logo 1" style="height:40px; width:auto; display:block;">
-        </a>
-        <a href="https://example.com/partner2" style="display:inline-block; line-height:0;">
-          <img src="static/images/Concordia_Logo.png" alt="Right logo 2" style="height:40px; width:auto; display:block;">
-        </a>
-      </div>
-    </div>
-  
+
   <!-- Scroll to Top Button -->
   <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
     <i class="fas fa-chevron-up"></i>
   </button>
 
-  <main id="main-content" style="padding-top:72px;">
+
+  <main id="main-content">
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
@@ -325,6 +252,8 @@
   </div>
 </section>
 
+
+
 <!-- Teaser Image -->
 <section class="section hero is-light">    
 
@@ -355,7 +284,7 @@
 </section>
 <!-- End teaser image -->
 
-<!-- (rest of your original content unchanged) -->
+
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
@@ -392,9 +321,323 @@
 </section>
 <!-- End paper abstract -->
 
-<!-- (the rest of your content continues unchanged) -->
+<!-- What do we aim to solve? -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">What do we aim to solve?</h2>
+    </div>
+    <div class="content has-text-justified">
+      <p>
+        We first begin with a definition. Texture mapping, also referred to as UV/Mesh parameterization, is the process of converting a 3D mesh surface into a 2D image. It is a core step in digital 3D content production, 
+        enabling texture synthesis, painting, transfer, and high-quality rendering. For example, as shown in the top row of the figure below, given a raw 3D sphere mesh, the goal is to texture the sphere using a world map
+        image. This task is relatively straightforward for a 3D artist or designer, as mapping pixels from a 2D texture image to vertices on a spherical surface is largely intuitive for humans. However, as the 3D geometry
+        becomes more complex, such as the dragon shown in the bottom row of the figure, the problem of establishing a correspondence between the texture image and the 3D mesh becomes significantly more challenging. This process
+        requires careful consideration of many factors, including surface continuity, distortion, and cutting seam placement. As a result, UV mapping poses two major challenges for UV/layout artists, designers, engineers, and others
+        working with 3D assets: (1) the time required to design an effective mapping between 3D and 2D spaces increases substantially with geometric complexity, and (2) there is no generalized solution to this problem, requiring
+        artists to manually design a custom mapping for each individual 3D object.
+      </p>      
+      
+      <img src="static/images/TextureMapping.jpg" alt="Texture Mapping" class="blend-img-background center-image" style="width: 90%; display: block; margin: 2rem auto;">
+      
+      <p>        
+        While recent 3D generative methods can produce high-quality textures for 3D mesh objects (as shown in the picture below), they commonly rely on the heavy assumption that input 3D meshes are accompanied by the mesh parameterization process that requires
+        both technical precision and artistic judgment. This assumption limits the usability of these generative AI models for content creators and designers. Moreover, industry surveys show that this process often accounts for 
+        a significant share of asset creation (up to ~60% of the overall 3D content production pipeline), creating a major bottleneck for 3D content creators.
+      </p>
+      
+      <img src="static/images/UV_Texture_Joint_Optimization.jpg" alt="UV Texture Joint Optimization" class="blend-img-background center-image" style="width: 95%; display: block; margin: 2rem auto;">
 
-<!-- BibTex and footer (unchanged) -->
+      <p>
+        Therefore, the research question we aim to address in this study is:
+        <strong>Can we automate UV mapping in 3D content creation using AI in a way that satisfies the properties required by downstream tasks (e.g., texture synthesis),
+        with the goal of accelerating and simplifying the workflows of UV/layout and modeling artists?</strong>
+      </p>
+    </div>
+  </div>
+</section>
+<!-- End What do we aim to solve? -->
+
+
+<!-- Problem Statement and Preliminaries-->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Problem Statement and Preliminaries</h2>
+    </div>
+
+    <div class="content has-text-justified">
+      <p>        
+          To address these issues and automate mesh parameterization, numerous methods have been proposed that mainly focus on geometric properties such as bijectivity, conformality, and equiareality, which we will explain in the following.
+          The intuition behind all these properties is that, as shown in the picture below, once we convert a 3D triangular mesh surface into a 2D space (texture image), each triangular facet on the mesh surface in the 3D space is mapped to its corresponding triangle in the 2D space.
+          Thus, what these properties enforce during this 3D-to-2D mapping process is that these triangular facets should be mapped into the 2D space in such a way that the overall distortion of all mapped triangular faces is minimized. This distortion includes preserving
+          the triangular edge lengths as much as possible (isometricity), keeping the angles between each pair of edges nearly unchanged (conformality), and maintaining the area of each facet (equiareality). Moreover, bijectivity means that the mapping should be one-to-one,
+          so that each surface point maps to a unique UV location. Once all these four properties are satisfied, we say that the specific UV mapping is geometry-preserving.
+      </p>
+        
+      <img src="static/images/TriangularMesh_Parameterization.png" alt="Triangular Mesh Parameterization" class="blend-img-background center-image" style="width: 90%; display: block; margin: 2rem auto;">
+      
+      <p>
+        However, we would argue that while these properties are necessary to achieve a high-quality mesh parameterization, they are not sufficient for many downstream applications in content creation and texture synthesis. In particular, two perceptual criteria are often
+        neglected: (1) semantic awareness, 2D UV charts should align with semantically meaningful surface 3D parts so that textures designed for a semantic region remain coherent and transferable across 3D shapes; and (2) visibility awareness, cutting seams should
+        be placed where they are unlikely to be observed under typical viewpoints and lighting, so that seam artifacts are less perceptible after texturing and rendering.
+        <br><br>
+        To overcome these shortcomings, we present an unsupervised differentiable framework that augments standard geometry-preserving UV learning with semantic- and visibility-aware objectives. For semantic-awareness, our pipeline (i) segments the mesh into semantic
+        3D parts, (ii) applies an unsupervised learned per-part UV-parameterization backbone, and (iii) aggregates per-part charts into a unified UV atlas. For visibility-awareness, we use ambient occlusion (AO) as an exposure proxy and back-propagate a soft differentiable
+        AO-weighted seam objective designed to steer cutting seams toward occluded regions. The proposed pipeline has two stages: (i) a neural surface-parameterization backbone enforces geometry-preserving properties, (ii) semantic-aware and visibility-aware modules provide
+        task-specific (e.g., texture painting) guidance.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- End What do we aim to solve? -->
+
+<!-- Paper methodology -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Methodology</h2>
+    </div>
+    <div class="content has-text-justified">
+      <h3>Semantic-Aware UV Parameterization Pipeline</h3>
+      <p>
+        To encourage semantically coherent UV charts that simplify texture editing, transfer, and cross-object correspondence, we design a partition-and-parameterize pipeline (illustrated in figure below). 
+        Our semantic-aware parameterization has three stages:
+      </p>
+      
+      <img src="static/images/ICLR_Approach_Overview_v1.1.png" alt="Training overview" class="blend-img-background center-image">
+      
+      <p>          
+          <strong> Stage 1: Semantic 3D partitioning</strong>, where we compute a per-vertex semantic partition of the input mesh using the shape diameter function (ShDF): Given an input mesh M=(V,F), we compute a semantic partition 
+          using the shape diameter function (ShDF) as our primary signal. Intuitively, the ShDF maps each surface sample to a scalar that estimates the local object thickness (the diameter of the object in the 
+          vicinity of that sample). Similar ShDF values typically indicate coherent semantic parts (e.g., limbs, body, handles), making the ShDF a practical cue for part-level partitioning of 3D shapes. 
+          <br><br>
+          Our 3D partitioning strategy consists of the following steps for the detailed explanation of each step: (a) compute local ShDF, we compute a local thickness (ShDF) per face via ray casting inside
+          a cone about the inward normal at each surface point and smoothing the samples for spatial coherence; (b) fit GMM, to obtain soft per-face class likelihoods, we use a 1-D Gaussian mixture model (GMM) to fit K 
+          (the deisred number of semantic components) Gaussians to the per-face thicknesses; (c) boundary smoothness cost, to bias the partition toward spatially coherent regions, we then combine these likelihoods with a
+          geometry-aware pairwise smoothness penalty (e.g., a dihedral-angle based boundary cost) on adjacent faces on the geometry to encourage coherent regions and penalize label changes across sharp edges. (d) initial 
+          labeling, we then assign each face to the GMM component with maximum probability (minimum negative log-likelihood). This produces a purely data-driven segmentation that is generally noisy but captures the major 
+          mode structure of the thickness field. (e) refine with graph cuts, we then refine the initial assignment by minimizing a global energy via iterative alpha-expansion, solving each expansion by an optimal min-cut. 
+          Repeating this process across labels and iterating a few times yields stable and low-energy 3D partitions. (f) Relabel connected components, after refinement, a single label index can correspond to multiple disconnected
+          components. To solve this issue, we relabel each connected component of faces so that every final label corresponds to a single connected sub-mesh. This guarantees that subsequent per-part processing operates on contiguous
+          regions. (g) Post-processing, to produce clean 3D segmentation results, we apply several simple post-processing heuristics to remove spurious tiny components that would complicate per-part UV parameterization. The output is
+          then a set of connected semantic sub-meshes suitable for the per-part UV parameterization stage. This high-level pipeline is simple, robust, and fast. We also evaluate two modern zero-shot segmentation baselines, SAMesh and 
+          PartField, as alternative partitioners and report comparative results in our ablation study.
+          <br><br>
+          <strong> Stage 2: Geometry-preserving UV learning</strong>, where we apply the base UV-parameterization backbone independently to each semantic 3D part to obtain per-part UV islands: For each semantic submesh, obtained from previous step, we 
+          instantiate the base parameterization backbone, and optimize a part-specific mapping. Each part is trained with the same suite of differentiable objectives used for the global model. Therefore, we minimize the per-part loss:
+      </p>
+          
+      <img src="static/images/PerPartParam_Loss.png" alt="Per-Part Parameterization Loss" class="blend-img-background center-image" style="width: 60%; display: block; margin: 2rem auto;">
+      
+      <p>          
+          <strong> Stage 3: UV atlas aggregation and packing</strong>, where we aggregate and pack these islands into a unified UV atlas: After optimizing all parts, we obtain per-part UV islands (each normalized to the unit square) corrsponding to each 3D 
+          segmented part. These islands are merged into a single atlas by an atlas aggregator. For clarity and reproducibility our current aggregator is intentionally simple and deterministic: the final UV sheet is a unit square subdivided
+          into a G*G regular grid. We then assign each part k a unique grid cell indexed by row and column in row-major order. Each normalized island is placed into its assigned cell via a uniform similarity transform:          
+      </p>
+      
+      <img src="static/images/AtlasAggregator_Formula.png" alt="Atlas Aggregator Formula" class="blend-img-background center-image" style="width: 80%; display: block; margin: 2rem auto;">
+      
+    </div>
+
+    <div class="content has-text-justified">
+      
+      <h3>Visibility-Aware UV Parameterization Pipeline</h3>
+      
+      <p>
+          A common perceptual failure of UV atlases is that seams positioned on exposed, well-lit, or frequently viewed regions create visible discontinuities once textures are applied. To address this,
+          we introduce a visibility-aware objective that biases seam placement toward surface areas with low viewer exposure. As a proxy for visibility, we leverage ambient occlusion (AO), a standard geometric
+          measure of how much of the local hemisphere around a surface point is blocked by nearby geometry. This objective guides the backbone to produce UV islands whose seams coincide with regions of low exposure,
+          thereby relocating cuts to less visible areas of the 3D surface and reducing perceptible seam artifacts after texturing and rendering.
+          <br>
+          Our training procedure consists of four steps:
+          <br><br>
+          <strong> Step 1 - Compute per-vertex AO values on the input mesh:</strong> For each point (vertex) on the mesh surface, we define a hemisphere of outgoing directions (along with the normal direction at each vertex). Also we define
+          a binary visibiliy function V(p, w) as below at each point and direction on the mesh surface:
+      </p>
+          
+      <img src="static/images/BinaryVisibilityFunction.png" alt="Binary Visibility Function" class="blend-img-background center-image" style="width: 95%; display: block; margin: 2rem auto;">          
+      
+      <p>    
+        The ambient occlusion exposure AO(p) is then defined as the cosine-weighted average visibility over the hemisphere:
+      </p>
+          
+      <img src="static/images/AO_Formula.png" alt="AO Formula" class="blend-img-background center-image" style="width: 50%; display: block; margin: 2rem auto;">                    
+      
+      <p>    
+        By this convention, AO(p)=1 indicates a fully exposed point (no occlusion) and AO(p)=0 indicates a fully occluded point. We visualize per-vertex ambient occlusion for three different mesh objects (rabbit, cow, and human) in the picture below.
+        The yellow and purple colors indicate the exposed and occluded parts of the mesh objects, respectively.
+      </p>
+          
+      <img src="static/images/AmbientOcclusion_Visualization.png" alt="Ambient Occlusion Visualization" class="blend-img-background center-image" style="width: 95%; display: block; margin: 2rem auto;">
+      
+      <p>    
+        <strong> Step 2 - Apply a base UV-parameterization backbone to obtain candidate UV islands:</strong> Once per-vertex AO values are computed, we generate the UV parameterization using the base backbone to obtain a potential UV parameterization candidate.
+        This step is exactly the same as Step 2 in the semantic-aware UV parameterization pipeline described above.
+        <br><br>
+        <strong> Step 3 - Extract UV boundary points corresponding to cutting seams:</strong> We then extract cutting seams directly from the UV mapping learned in the previous step. This process has three steps: (a) neighbor selection, given a set of 3D surface
+        points P with their corresponding UV coordinates Q, the method determines whether each vertex lies on a seam by exploring its neighborhood. For each 3D point p_i in P with UV coordinate q_i in Q, we first find its N nearest neighbors in 3D,
+        with corresponding UV coordinates. (b) max UV distance computation,  we then compute the maximum UV distance between q_i and its neighbors q_ij:
+      </p>
+      
+      <img src="static/images/Max_Equation.png" alt="Max Equation" class="blend-img-background center-image" style="width: 50%; display: block; margin: 2rem auto;">
+      
+      <p>
+        The intuition behind equation above is that, during training, at each iteration we must identify the cutting-seam (boundary) points in UV space in order to evaluate their ambient occlusion values and then compute the visibility-aware loss. 
+        Minimizing this loss encourages the model to learn UV parameterizations whose seams lie in less-visible (low-AO) regions. Equation above provides a mechanism for detecting these seam points. Rather than locating seams directly on the 3D mesh,
+        we detect them in the UV domain based on how local neighborhoods deform during unwrapping. Specifically, for each 3D vertex we know both its 3D coordinates and its corresponding UV coordinates at the current iteration. Therefore, we examine the
+        3D neighbors of each vertex and compare their mapped UV positions. If a pair of vertices are close neighbors on the 3D surface but become separated by more than a threshold distance in UV space, this indicates that the surface has been cut between them.
+        We therefore mark such UV points as seam (boundary) points. This criterion is grounded in the fact that any valid unwrapping must introduce discontinuities (i.e., seams): vertices that are adjacent on the 3D surface become far apart in the UV plane after
+        the mesh is cut open. Equation above formalizes this idea by detecting precisely those locations where this large separation occurs. 
+        <br><br>
+        The picture below shows a visualization of the cutting seam vertices of a 3D bunny in 3D space (right) and their corresponding UV coordinates in the 2D UV space (left), highlighted in red. Other vertices and their corresponding UV points are shown in grey.
+      </p>
+      
+      <img src="static/images/CutSeamExtract_Visualization.png" alt="Cutting Seam Extraction Visualization" class="blend-img-background center-image" style="width: 85%; display: block; margin: 2rem auto;">
+      
+      <p>
+        <strong> Step 4 - Compute and minimize the AO-weighted average over the associated 3D vertices:</strong> However, this maximization problem in the equation above is not inherently differentiable, so we introduce mathematical modifications to ensure differentiability during the
+        learning process. Specifically, instead of a hard decision, we assign each vertex a differentiable soft seam membership score. The maximization problem can then be formulated as a differentiable function:
+      </p>
+  
+      <img src="static/images/Differentiable_Max_Equation.png" alt="Differentiable Max Equation" class="blend-img-background center-image" style="width: 90%; display: block; margin: 2rem auto;">
+      <p>
+        After identifying soft seam memberships for each vertex, we encourage seams to lie in less visible regions of the surface. As a visibility proxy, we use per-vertex ambient occlusion values, computed in the first step, where 0 indicates fully occluded and $1$ indicates fully visible.
+        The loss is then defined as the weighted average of occlusion values, using soft seam memberships as weights:
+      </p>
+        
+      <img src="static/images/AO_Loss.png" alt="AO Loss" class="blend-img-background center-image" style="width: 20%; display: block; margin: 2rem auto;">
+      
+      <p>
+        Intuitively, if the network assigns high seam weight to highly visible vertices (high AO), the loss is large. Conversely, assigning seam weight to occluded vertices (low AO) reduces the loss. Therefore, minimizing the loss function above guides seam placement toward regions of low exposure.
+      </p>
+    </div>
+    
+  </div>
+</section>
+<!-- End paper methodology -->
+
+
+<!-- Comparative Results-->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+     <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3">Comparative Results</h2>
+     </div>
+    
+      <div class="content has-text-justified">
+        <p>
+          We evaluate our unsupervised semantic- and visibility-aware UV parameterization pipelines on a diverse collection of meshes and compare against several baselines.
+          We provide both qualitative and quantitative comparisons to: FlexPara (recent state-of-the-art global parameterization network), Autodesk Maya (industry-grade commercial software),
+          Blender (popular open-source modeling tool), and xatlas (widely-used C++ library for generating unique texture coordinates suitable for lightmap baking and texture painting).
+        </p>
+
+        <h3> Qualitative Comparison of Visibility-Aware UV Parameterization </h3>
+
+        <img src="static/images/ICLR_AO_UV_Seams_Figure_v1.1.png" alt="Comparative results" class="blend-img-background center-image" style="width: 100%; display: block; margin: 2rem auto;">
+        <p>          
+          Qualitative results for visibility-aware seam placement and UV parameterization on three representative meshes. For each mesh, the top row shows per-vertex ambient occlusion (yellow = exposed, purple = occluded).
+          Beneath are the visualizations of cutting seams (red) from our method, FlexPara, and OptCuts (top to bottom). Our method places a larger fraction of seam geometry in less-exposed regions, reducing the likelihood
+          of visible seam artifacts under typical viewpoints.
+        </p>
+      </div>    
+
+
+      <div class="content has-text-justified">
+        <h3> Qualitative Comparison of Semantic-Aware UV Parameterization </h3>
+        <img src="static/images/Results_SemanticAware_Short_Short.jpg" alt="Comparative results" class="blend-img-background center-image" style="width: 60%; display: block; margin: 2rem auto;">
+        <p>
+          Qualitative results of the proposed semantic-aware UV parameterization method on a Rabbit mesh. For each method, we show the rendered 3D object from multiple viewpoints, with the corresponding UV atlas in the rightmost column.
+          As shown, our method produces UV charts that are align more semantically with the mesh’s 3D semantic parts, unlike the baselines.
+        </p>
+      </div>
+
+      <div class="content has-text-justified">
+        <h3> Qualitative Comparison of Checkerboard Texturing using Different UV Parameterization Methods </h3>
+        <img src="static/images/Results_VisibilityAware_CheckerboardDistortion_Full.jpg" alt="Comparative results" class="blend-img-background center-image" style="width: 90%; display: block; margin: 2rem auto;">
+        <p>
+          Checkerboard texturing comparison using UV parameterizations produced by our visibility-aware method, FlexPara, and OptCuts. Each row shows rendered views of different meshes textured with a checkerboard and a magnified inset of a
+          visually important region near seams (red circles). Because our method steers seams toward occluded regions, the checkerboard pattern appears substantially more continuous from typical camera viewpoints. By contrast, baselines exhibit
+          visible seam artifacts in the zoomed-in insets.
+        </p>
+      </div>
+
+    <div class="content has-text-justified">
+      <h3> Quantitative Comparison of Semantic-Aware UV Parameterization </h3>
+      <img src="static/images/Quantitative_Semantic.jpg" alt="Comparative results" class="blend-img-background center-image" style="width: 95%; display: block; margin: 2rem auto;">            
+    </div>
+    
+    <div class="content has-text-justified">
+      <h3> Quantitative Comparison of Visibility-Aware UV Parameterization </h3>
+      <img src="static/images/Quantitative_Visibility.jpg" alt="Comparative results" class="blend-img-background center-image" style="width: 95%; display: block; margin: 2rem auto;">
+    </div>
+
+    <div class="content has-text-justified">    
+      <h3> User Preference Study </h3>
+      <p>
+        To evaluate semantic- and visibility-awareness of the proposed method, we conducted a user-preference study with 115 participants.
+        We distributed the questionnaire to two groups: experts and general participants. Of the 115 participants, 70 are general participants
+        (including graduate students with computer science and engineering backgrounds) and 45  are experts: 31 software engineers, 3 project managers,
+        2 product owners, 5 UV/layout artists, and 4 modeling artists, all working in the Media and Entertainment industry for film and games.
+        Each participant completed 11 comparisons between textured 3D shapes and UV parameterizations produced by our method, FlexPara, OptCuts, Autodesk Maya,
+        Blender, and xatlas. For each comparison, participants were rated each result according to three visual criteria: (i) texture-pattern smoothness/continuity,
+        (ii) semantic alignment (how well colors correspond to meaningful parts), and (iii) seam visibility (how well seams are placed in occluded/less-obvious regions).
+        The semantic-aware and visibility-aware evaluations comprised 5 and 6 questions, respectively, for a total of 11 comparisons per participant. Tables below report
+        the percentage of expert and general participant preferences for each method. As the tables show, our proposed method is strongly preferred over the baselines by
+        both expert industry-level users and general users.
+      </p>
+      <img src="static/images/Expert_UserStudy.jpg" alt="Comparative results" class="blend-img-background center-image" style="width: 90%; display: block; margin: 2rem auto;">
+      <img src="static/images/General_UserStudy.jpg" alt="Comparative results" class="blend-img-background center-image" style="width: 90%; display: block; margin: 2rem auto;">
+    </div>
+    
+  </div>
+</section>
+
+
+<!-- Acknowledgements -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Acknowledgements</h2>
+        <div class="content has-text-justified">          
+          <p>
+            This research was supported by Autodesk Research and the Autodesk AI Lab. We are especially thankful for the collaborative environment, technical resources, and insightful discussions that contributed to shaping this work.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+    
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="content has-text-justified">          
+        <p>
+          If you find this study useful in your work, we kindly ask that you cite it using the following format.
+        </p>
+      </div>      
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@article{zamani2025unsupervised,    
+  title={Unsupervised Representation Learning for 3D Mesh Parameterization with Semantic and Visibility Objectives},
+  author={Zamani, AmirHossein and Roy, Bruno and Rampini, Arianna},
+  journal={arXiv preprint arXiv:2509.25094},
+  year={2025},
+  url={https://ahhhz975.github.io/Automatic3DMeshParameterization/}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
 
   <footer class="footer">
   <div class="container">
@@ -403,7 +646,7 @@
         <div class="content">
 
           <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
             You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
             Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
