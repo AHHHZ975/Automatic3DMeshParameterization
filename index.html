@@ -401,17 +401,18 @@
     <div class="content has-text-justified">
       <h3>Semantic-Aware UV Parameterization Pipeline</h3>
       <p>
-        To encourage semantically coherent UV charts that simplify texture editing, transfer, and cross-object correspondence, we design a partition-and-parameterize pipeline (illustrated in figure above). 
+        To encourage semantically coherent UV charts that simplify texture editing, transfer, and cross-object correspondence, we design a partition-and-parameterize pipeline (illustrated in figure below). 
         Our semantic-aware parameterization has three stages:
       </p>
       
       <img src="static/images/ICLR_Approach_Overview_v1.1.png" alt="Training overview" class="blend-img-background center-image">
       
       <p>          
-          <strong> Stage 1: Semantic 3D partitioning</strong>, where we compute a per-vertex semantic partition of the input mesh using the shape diameter function (ShDF): Given an input mesh M}=(V,F), we compute a semantic partition 
+          <strong> Stage 1: Semantic 3D partitioning</strong>, where we compute a per-vertex semantic partition of the input mesh using the shape diameter function (ShDF): Given an input mesh M=(V,F), we compute a semantic partition 
           using the shape diameter function (ShDF) as our primary signal. Intuitively, the ShDF maps each surface sample to a scalar that estimates the local object thickness (the diameter of the object in the 
           vicinity of that sample). Similar ShDF values typically indicate coherent semantic parts (e.g., limbs, body, handles), making the ShDF a practical cue for part-level partitioning of 3D shapes. 
-          Specifically, our 3D partitioning strategy consists of the following steps for the detailed explanation of each step: (a) compute local ShDF, we compute a local thickness (ShDF) per face via ray casting inside
+          <br><br>
+          Our 3D partitioning strategy consists of the following steps for the detailed explanation of each step: (a) compute local ShDF, we compute a local thickness (ShDF) per face via ray casting inside
           a cone about the inward normal at each surface point and smoothing the samples for spatial coherence; (b) fit GMM, to obtain soft per-face class likelihoods, we use a 1-D Gaussian mixture model (GMM) to fit K 
           (the deisred number of semantic components) Gaussians to the per-face thicknesses; (c) boundary smoothness cost, to bias the partition toward spatially coherent regions, we then combine these likelihoods with a
           geometry-aware pairwise smoothness penalty (e.g., a dihedral-angle based boundary cost) on adjacent faces on the geometry to encourage coherent regions and penalize label changes across sharp edges. (d) initial 
@@ -450,7 +451,7 @@
           thereby relocating cuts to less visible areas of the 3D surface and reducing perceptible seam artifacts after texturing and rendering.
           <br>
           Our training procedure consists of four steps:
-          <br>
+          <br><br>
           <strong> Step 1 - Compute per-vertex AO values on the input mesh:</strong> For each point (vertex) on the mesh surface, we define a hemisphere of outgoing directions (along with the normal direction at each vertex). Also we define
           a binary visibiliy function V(p, w) as below at each point and direction on the mesh surface:
       </p>
@@ -464,17 +465,19 @@
       <img src="static/images/AO_Formula.png" alt="AO Formula" class="blend-img-background center-image" style="width: 50%; display: block; margin: 2rem auto;">                    
       
       <p>    
-        By this convention, AO(p)=1 indicates a fully exposed point (no occlusion) and AO(p)=0 indicates a fully occluded point. 
+        By this convention, AO(p)=1 indicates a fully exposed point (no occlusion) and AO(p)=0 indicates a fully occluded point. We visualize per-vertex ambient occlusion for three different mesh objects (rabbit, cow, and human) in the picture below.
+        The yellow and purple colors indicate the exposed and occluded parts of the mesh objects, respectively.
       </p>
           
       <img src="static/images/AmbientOcclusion_Visualization.png" alt="Ambient Occlusion Visualization" class="blend-img-background center-image" style="width: 95%; display: block; margin: 2rem auto;">
       
       <p>    
         <strong> Step 2 - Apply a base UV-parameterization backbone to obtain candidate UV islands:</strong> Once per-vertex AO values are computed, we generate the UV parameterization using the base backbone to obtain a potential UV parameterization candidate.
+        This step is exactly the same as Step 2 in the semantic-aware UV parameterization pipeline described above.
         <br><br>
         <strong> Step 3 - Extract UV boundary points corresponding to cutting seams:</strong> We then extract cutting seams directly from the UV mapping learned in the previous step. This process has three steps: (a) neighbor selection, given a set of 3D surface
         points P with their corresponding UV coordinates Q, the method determines whether each vertex lies on a seam by exploring its neighborhood. For each 3D point p_i in P with UV coordinate q_i in Q, we first find its N nearest neighbors in 3D,
-        with corresponding UV coordinates. (b) max UV distance computation,  we then compute the maximum UV distance between q_i and its neighbors:
+        with corresponding UV coordinates. (b) max UV distance computation,  we then compute the maximum UV distance between q_i and its neighbors q_ij:
       </p>
       
       <img src="static/images/Max_Equation.png" alt="Max Equation" class="blend-img-background center-image" style="width: 50%; display: block; margin: 2rem auto;">
@@ -485,13 +488,14 @@
         we detect them in the UV domain based on how local neighborhoods deform during unwrapping. Specifically, for each 3D vertex we know both its 3D coordinates and its corresponding UV coordinates at the current iteration. Therefore, we examine the
         3D neighbors of each vertex and compare their mapped UV positions. If a pair of vertices are close neighbors on the 3D surface but become separated by more than a threshold distance in UV space, this indicates that the surface has been cut between them.
         We therefore mark such UV points as seam (boundary) points. This criterion is grounded in the fact that any valid unwrapping must introduce discontinuities (i.e., seams): vertices that are adjacent on the 3D surface become far apart in the UV plane after
-        the mesh is cut open. Equation above formalizes this idea by detecting precisely those locations where this large separation occurs.
+        the mesh is cut open. Equation above formalizes this idea by detecting precisely those locations where this large separation occurs. The picture below shows a visualization of the cutting seam vertices of a 3D bunny in 3D space (right) and their corresponding
+        UV coordinates in the 2D UV space (left), highlighted in red. Other vertices and their corresponding UV points are shown in grey.
       </p>
       
       <img src="static/images/CutSeamExtract_Visualization.png" alt="Cutting Seam Extraction Visualization" class="blend-img-background center-image" style="width: 85%; display: block; margin: 2rem auto;">
       
       <p>
-        <strong> Step 4 - Compute and minimize the AO-weighted average over the associated 3D vertices:</strong>: However, this maximization problem in the equation above is not inherently differentiable, so we introduce mathematical modifications to ensure differentiability during the
+        <strong> Step 4 - Compute and minimize the AO-weighted average over the associated 3D vertices:</strong> However, this maximization problem in the equation above is not inherently differentiable, so we introduce mathematical modifications to ensure differentiability during the
         learning process. Specifically, instead of a hard decision, we assign each vertex a differentiable soft seam membership score. The maximization problem can then be formulated as a differentiable function:
       </p>
   
