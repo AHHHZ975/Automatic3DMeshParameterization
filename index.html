@@ -182,6 +182,30 @@
 <body>
 
 
+  <!-- put this immediately after <body> -->
+<div style="position:fixed; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:0.5rem 1rem; z-index:9999; background:rgba(255,255,255,0.0);">
+  <!-- LEFT logo (top-left corner) -->
+  <a href="/" style="display:inline-block; line-height:0;">
+    <img src="static/images/Autodesk_Logo.jpg" alt="Left logo" style="height:48px; max-height:48px; width:auto; display:block;">
+  </a>
+
+  <!-- RIGHT logos (two side-by-side) -->
+  <div style="display:flex; gap:0.6rem; align-items:center;">
+    <a href="https://example.com/partner1" style="display:inline-block; line-height:0;">
+      <img src="static/images/Mila_Logo.png" alt="Right logo 1" style="height:40px; max-height:40px; width:auto; display:block;">
+    </a>
+    <a href="https://example.com/partner2" style="display:inline-block; line-height:0;">
+      <img src="static/images/Concordia_Logo.png" alt="Right logo 2" style="height:40px; max-height:40px; width:auto; display:block;">
+    </a>
+  </div>
+</div>
+
+<!-- adjust your main so content is not hidden under the fixed header -->
+<!-- change your existing <main id="main-content"> to this: -->
+<main id="main-content" style="padding-top:68px;">
+  <!-- ...rest of page... -->
+
+  
   <!-- Scroll to Top Button -->
   <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
     <i class="fas fa-chevron-up"></i>
